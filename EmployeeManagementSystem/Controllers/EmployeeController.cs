@@ -31,5 +31,19 @@ namespace EmployeeManagementSystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var emp = _context.Employees.Find(id);
+            return View(emp);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Employee emp)
+        {
+            _context.Employees.Update(emp);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

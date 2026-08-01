@@ -11,6 +11,7 @@
         <th>Designation</th>
         <th>Joining Date</th>
         <th>Salary</th>
+        <th>Action</th>
     </tr>
 
     @foreach (var emp in Model)
@@ -23,6 +24,10 @@
             <td>@emp.designation</td>
             <td>@emp.joiningDate.ToString("dd-MM-yyyy")</td>
             <td>@emp.salary</td>
+            <td><a href="/Employee/Edit/@emp.emp_id">Edit</a></td>
         </tr>
     }
 </table>
+
+<br />
+<a href="/Employee/Create">Add New Employee</a>

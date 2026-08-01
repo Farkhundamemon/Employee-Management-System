@@ -1,0 +1,38 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+<h2>Edit Employee</h2>
+
+<form method="post" action="/Employee/Edit">
+
+    <input type="hidden" name="emp_id" value="@Model.emp_id" />
+
+    <label>Full Name:</label><br />
+    <input type="text" name="emp_name" value="@Model.emp_name" required /><br /><br />
+
+    <label>Email:</label><br />
+    <input type="email" name="emp_email" value="@Model.emp_email" required /><br /><br />
+
+    <label>Phone:</label><br />
+    <input type="text" name="phone" value="@Model.phone" /><br /><br />
+
+    <label>Department ID:</label><br />
+    <input type="number" name="Dep_id" value="@Model.Dep_id" required /><br /><br />
+
+    <label>Designation:</label><br />
+    <input type="text" name="designation" value="@Model.designation" /><br /><br />
+
+    <label>Joining Date:</label><br />
+    <input type="date" name="joiningDate" value="@Model.joiningDate.ToString("yyyy-MM-dd")" /><br /><br />
+
+    <label>Salary:</label><br />
+    <input type="number" step="0.01" name="salary" value="@Model.salary" /><br /><br />
+
+    <label>Password:</label><br />
+    <input type="password" name="password" value="@Model.password" /><br /><br />
+
+    <button type="submit">Update Employee</button>
+
+</form>
+
+<br />
+<a href="/Employee/Index">Back to Employee List</a>
