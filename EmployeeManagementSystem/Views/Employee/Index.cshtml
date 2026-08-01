@@ -1,0 +1,28 @@
+﻿@model List<EmployeeManagementSystem.Models.Employee>
+
+<h2>Employee List</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Designation</th>
+        <th>Joining Date</th>
+        <th>Salary</th>
+    </tr>
+
+    @foreach (var emp in Model)
+    {
+        <tr>
+            <td>@emp.emp_id</td>
+            <td>@emp.emp_name</td>
+            <td>@emp.emp_email</td>
+            <td>@emp.phone</td>
+            <td>@emp.designation</td>
+            <td>@emp.joiningDate.ToString("dd-MM-yyyy")</td>
+            <td>@emp.salary</td>
+        </tr>
+    }
+</table>
