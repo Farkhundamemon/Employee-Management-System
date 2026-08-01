@@ -45,5 +45,16 @@ namespace EmployeeManagementSystem.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            var emp = _context.Employees.Find(id);
+            if (emp != null)
+            {
+                _context.Employees.Remove(emp);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
