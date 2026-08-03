@@ -1,0 +1,26 @@
+﻿@model List<EmployeeManagementSystem.Models.Department>
+
+<h2>Department List</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Department Name</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var dept in Model)
+    {
+        <tr>
+            <td>@dept.Dep_id</td>
+            <td>@dept.Dep_name</td>
+            <td>
+                <a href="/Department/Edit/@dept.Dep_id">Edit</a> |
+                <a href="/Department/Delete/@dept.Dep_id" onclick="return confirm('Are you sure you want to delete this department?');">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<a href="/Department/Create">Add New Department</a>

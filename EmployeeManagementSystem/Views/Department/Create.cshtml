@@ -1,0 +1,15 @@
+﻿@model EmployeeManagementSystem.Models.Department
+
+<h2>Add New Department</h2>
+
+<form method="post" action="/Department/Create">
+
+    <label>Department Name:</label><br />
+    <input type="text" name="Dep_name" required /><br /><br />
+
+    <button type="submit">Add Department</button>
+
+</form>
+
+<br />
+<a href="/Department/Index">Back to Department List</a>

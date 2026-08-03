@@ -1,0 +1,17 @@
+﻿@model EmployeeManagementSystem.Models.Department
+
+<h2>Edit Department</h2>
+
+<form method="post" action="/Department/Edit">
+
+    <input type="hidden" name="Dep_id" value="@Model.Dep_id" />
+
+    <label>Department Name:</label><br />
+    <input type="text" name="Dep_name" value="@Model.Dep_name" required /><br /><br />
+
+    <button type="submit">Update Department</button>
+
+</form>
+
+<br />
+<a href="/Department/Index">Back to Department List</a>
