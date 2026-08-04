@@ -2,33 +2,35 @@
 
 <h2>Attendance List</h2>
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>ID</th>
-        <th>Employee ID</th>
-        <th>Date</th>
-        <th>Check In</th>
-        <th>Check Out</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
+<a href="/Attendance/Create" class="btn btn-primary mb-3">+ Add New Attendance</a>
 
-    @foreach (var att in Model)
-    {
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
         <tr>
-            <td>@att.attentence_id</td>
-            <td>@att.emp_id</td>
-            <td>@att.date.ToString("dd-MM-yyyy")</td>
-            <td>@att.checkIn</td>
-            <td>@att.checkOut</td>
-            <td>@att.status</td>
-            <td>
-                <a href="/Attendance/Edit/@att.attentence_id">Edit</a> |
-                <a href="/Attendance/Delete/@att.attentence_id" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
-            </td>
+            <th>ID</th>
+            <th>Employee ID</th>
+            <th>Date</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Status</th>
+            <th>Action</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var att in Model)
+        {
+            <tr>
+                <td>@att.attentence_id</td>
+                <td>@att.emp_id</td>
+                <td>@att.date.ToString("dd-MM-yyyy")</td>
+                <td>@att.checkIn</td>
+                <td>@att.checkOut</td>
+                <td>@att.status</td>
+                <td>
+                    <a href="/Attendance/Edit/@att.attentence_id" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="/Attendance/Delete/@att.attentence_id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-
-<br />
-<a href="/Attendance/Create">Add New Attendance</a>
