@@ -1,0 +1,31 @@
+﻿@model EmployeeManagementSystem.Models.Attendance
+
+<h2>Add Attendance</h2>
+
+<form method="post" action="/Attendance/Create">
+
+    <label>Employee ID:</label><br />
+    <input type="number" name="emp_id" required /><br /><br />
+
+    <label>Date:</label><br />
+    <input type="date" name="date" required /><br /><br />
+
+    <label>Check In:</label><br />
+    <input type="time" name="checkIn" /><br /><br />
+
+    <label>Check Out:</label><br />
+    <input type="time" name="checkOut" /><br /><br />
+
+    <label>Status:</label><br />
+    <select name="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="Late">Late</option>
+    </select><br /><br />
+
+    <button type="submit">Add Attendance</button>
+
+</form>
+
+<br />
+<a href="/Attendance/Index">Back to Attendance List</a>

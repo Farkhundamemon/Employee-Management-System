@@ -1,0 +1,33 @@
+﻿@model EmployeeManagementSystem.Models.Attendance
+
+<h2>Edit Attendance</h2>
+
+<form method="post" action="/Attendance/Edit">
+
+    <input type="hidden" name="attentence_id" value="@Model.attentence_id" />
+
+    <label>Employee ID:</label><br />
+    <input type="number" name="emp_id" value="@Model.emp_id" required /><br /><br />
+
+    <label>Date:</label><br />
+    <input type="date" name="date" value="@Model.date.ToString("yyyy-MM-dd")" required /><br /><br />
+
+    <label>Check In:</label><br />
+    <input type="time" name="checkIn" value="@Model.checkIn" /><br /><br />
+
+    <label>Check Out:</label><br />
+    <input type="time" name="checkOut" value="@Model.checkOut" /><br /><br />
+
+    <label>Status:</label><br />
+    <select name="status">
+        <option value="Present" selected="@(Model.status == "Present")">Present</option>
+        <option value="Absent" selected="@(Model.status == "Absent")">Absent</option>
+        <option value="Late" selected="@(Model.status == "Late")">Late</option>
+    </select><br /><br />
+
+    <button type="submit">Update Attendance</button>
+
+</form>
+
+<br />
+<a href="/Attendance/Index">Back to Attendance List</a>
