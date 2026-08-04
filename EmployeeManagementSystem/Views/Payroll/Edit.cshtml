@@ -1,0 +1,26 @@
+﻿@model EmployeeManagementSystem.Models.Payroll
+
+<h2>Edit Payroll Record</h2>
+
+<form method="post" action="/Payroll/Edit">
+
+    <input type="hidden" name="payroll_id" value="@Model.payroll_id" />
+
+    <label>Employee ID:</label><br />
+    <input type="number" name="emp_id" value="@Model.emp_id" required /><br /><br />
+
+    <label>Month:</label><br />
+    <input type="text" name="month" value="@Model.month" required /><br /><br />
+
+    <label>Basic Salary:</label><br />
+    <input type="number" step="0.01" name="basic_salary" value="@Model.basic_salary" required /><br /><br />
+
+    <label>Deduction:</label><br />
+    <input type="number" step="0.01" name="deduction" value="@Model.deduction" /><br /><br />
+
+    <button type="submit">Update Payroll Record</button>
+
+</form>
+
+<br />
+<a href="/Payroll/Index">Back to Payroll List</a>

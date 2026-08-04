@@ -1,0 +1,34 @@
+﻿@model List<EmployeeManagementSystem.Models.Payroll>
+
+<h2>Payroll List</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Month</th>
+        <th>Basic Salary</th>
+        <th>Deduction</th>
+        <th>Net Salary</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.payroll_id</td>
+            <td>@p.emp_id</td>
+            <td>@p.month</td>
+            <td>@p.basic_salary</td>
+            <td>@p.deduction</td>
+            <td>@p.net_salary</td>
+            <td>
+                <a href="/Payroll/Edit/@p.payroll_id">Edit</a> |
+                <a href="/Payroll/Delete/@p.payroll_id" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<a href="/Payroll/Create">Add New Payroll Record</a>

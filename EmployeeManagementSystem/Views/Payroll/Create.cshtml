@@ -1,0 +1,24 @@
+﻿@model EmployeeManagementSystem.Models.Payroll
+
+<h2>Add Payroll Record</h2>
+
+<form method="post" action="/Payroll/Create">
+
+    <label>Employee ID:</label><br />
+    <input type="number" name="emp_id" required /><br /><br />
+
+    <label>Month:</label><br />
+    <input type="text" name="month" placeholder="e.g. January 2026" required /><br /><br />
+
+    <label>Basic Salary:</label><br />
+    <input type="number" step="0.01" name="basic_salary" required /><br /><br />
+
+    <label>Deduction:</label><br />
+    <input type="number" step="0.01" name="deduction" value="0" /><br /><br />
+
+    <button type="submit">Add Payroll Record</button>
+
+</form>
+
+<br />
+<a href="/Payroll/Index">Back to Payroll List</a>
