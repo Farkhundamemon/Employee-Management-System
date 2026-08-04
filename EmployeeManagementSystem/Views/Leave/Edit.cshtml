@@ -1,0 +1,40 @@
+﻿@model EmployeeManagementSystem.Models.Leave
+
+<h2>Edit Leave Request</h2>
+
+<form method="post" action="/Leave/Edit">
+
+    <input type="hidden" name="leave_id" value="@Model.leave_id" />
+
+    <label>Employee ID:</label><br />
+    <input type="number" name="emp_id" value="@Model.emp_id" required /><br /><br />
+
+    <label>Leave Type:</label><br />
+    <select name="leave_type">
+        <option value="Sick Leave" selected="@(Model.leave_type == "Sick Leave")">Sick Leave</option>
+        <option value="Casual Leave" selected="@(Model.leave_type == "Casual Leave")">Casual Leave</option>
+        <option value="Annual Leave" selected="@(Model.leave_type == "Annual Leave")">Annual Leave</option>
+    </select><br /><br />
+
+    <label>Start Date:</label><br />
+    <input type="date" name="start_date" value="@Model.start_date.ToString("yyyy-MM-dd")" required /><br /><br />
+
+    <label>End Date:</label><br />
+    <input type="date" name="end_date" value="@Model.end_date.ToString("yyyy-MM-dd")" required /><br /><br />
+
+    <label>Reason:</label><br />
+    <input type="text" name="reason" value="@Model.reason" /><br /><br />
+
+    <label>Status:</label><br />
+    <select name="status">
+        <option value="Pending" selected="@(Model.status == "Pending")">Pending</option>
+        <option value="Approved" selected="@(Model.status == "Approved")">Approved</option>
+        <option value="Rejected" selected="@(Model.status == "Rejected")">Rejected</option>
+    </select><br /><br />
+
+    <button type="submit">Update Leave Request</button>
+
+</form>
+
+<br />
+<a href="/Leave/Index">Back to Leave List</a>

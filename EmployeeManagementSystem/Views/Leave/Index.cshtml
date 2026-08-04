@@ -1,0 +1,36 @@
+﻿@model List<EmployeeManagementSystem.Models.Leave>
+
+<h2>Leave List</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var leave in Model)
+    {
+        <tr>
+            <td>@leave.leave_id</td>
+            <td>@leave.emp_id</td>
+            <td>@leave.leave_type</td>
+            <td>@leave.start_date.ToString("dd-MM-yyyy")</td>
+            <td>@leave.end_date.ToString("dd-MM-yyyy")</td>
+            <td>@leave.reason</td>
+            <td>@leave.status</td>
+            <td>
+                <a href="/Leave/Edit/@leave.leave_id">Edit</a> |
+                <a href="/Leave/Delete/@leave.leave_id" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+<a href="/Leave/Create">Add New Leave Request</a>
