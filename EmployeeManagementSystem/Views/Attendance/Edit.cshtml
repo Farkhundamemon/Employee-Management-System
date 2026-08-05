@@ -6,28 +6,36 @@
 
     <input type="hidden" name="attentence_id" value="@Model.attentence_id" />
 
-    <label>Employee ID:</label><br />
-    <input type="number" name="emp_id" value="@Model.emp_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Employee ID:</label>
+        <input type="number" name="emp_id" value="@Model.emp_id" class="form-control" required />
+    </div>
 
-    <label>Date:</label><br />
-    <input type="date" name="date" value="@Model.date.ToString("yyyy-MM-dd")" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Date:</label>
+        <input type="date" name="date" value="@Model.date.ToString("yyyy-MM-dd")" class="form-control" required />
+    </div>
 
-    <label>Check In:</label><br />
-    <input type="time" name="checkIn" value="@Model.checkIn" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Check In:</label>
+        <input type="time" name="checkIn" value="@Model.checkIn" class="form-control" />
+    </div>
 
-    <label>Check Out:</label><br />
-    <input type="time" name="checkOut" value="@Model.checkOut" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Check Out:</label>
+        <input type="time" name="checkOut" value="@Model.checkOut" class="form-control" />
+    </div>
 
-    <label>Status:</label><br />
-    <select name="status">
-        <option value="Present" selected="@(Model.status == "Present")">Present</option>
-        <option value="Absent" selected="@(Model.status == "Absent")">Absent</option>
-        <option value="Late" selected="@(Model.status == "Late")">Late</option>
-    </select><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Status:</label>
+        <select name="status" class="form-select">
+            <option value="Present" selected="@(Model.status == "Present")">Present</option>
+            <option value="Absent" selected="@(Model.status == "Absent")">Absent</option>
+            <option value="Late" selected="@(Model.status == "Late")">Late</option>
+        </select>
+    </div>
 
-    <button type="submit">Update Attendance</button>
+    <button type="submit" class="btn btn-success">Update Attendance</button>
+    <a href="/Attendance/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Attendance/Index">Back to Attendance List</a>

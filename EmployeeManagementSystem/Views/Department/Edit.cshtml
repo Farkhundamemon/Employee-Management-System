@@ -6,12 +6,12 @@
 
     <input type="hidden" name="Dep_id" value="@Model.Dep_id" />
 
-    <label>Department Name:</label><br />
-    <input type="text" name="Dep_name" value="@Model.Dep_name" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Department Name:</label>
+        <input type="text" name="Dep_name" value="@Model.Dep_name" class="form-control" required />
+    </div>
 
-    <button type="submit">Update Department</button>
+    <button type="submit" class="btn btn-success">Update Department</button>
+    <a href="/Department/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Department/Index">Back to Department List</a>

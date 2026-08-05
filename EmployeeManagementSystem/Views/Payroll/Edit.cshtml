@@ -6,21 +6,27 @@
 
     <input type="hidden" name="payroll_id" value="@Model.payroll_id" />
 
-    <label>Employee ID:</label><br />
-    <input type="number" name="emp_id" value="@Model.emp_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Employee ID:</label>
+        <input type="number" name="emp_id" value="@Model.emp_id" class="form-control" required />
+    </div>
 
-    <label>Month:</label><br />
-    <input type="text" name="month" value="@Model.month" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Month:</label>
+        <input type="text" name="month" value="@Model.month" class="form-control" required />
+    </div>
 
-    <label>Basic Salary:</label><br />
-    <input type="number" step="0.01" name="basic_salary" value="@Model.basic_salary" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Basic Salary:</label>
+        <input type="number" step="0.01" name="basic_salary" value="@Model.basic_salary" class="form-control" required />
+    </div>
 
-    <label>Deduction:</label><br />
-    <input type="number" step="0.01" name="deduction" value="@Model.deduction" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Deduction:</label>
+        <input type="number" step="0.01" name="deduction" value="@Model.deduction" class="form-control" />
+    </div>
 
-    <button type="submit">Update Payroll Record</button>
+    <button type="submit" class="btn btn-success">Update Payroll Record</button>
+    <a href="/Payroll/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Payroll/Index">Back to Payroll List</a>

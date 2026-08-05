@@ -4,35 +4,45 @@
 
 <form method="post" action="/Leave/Create">
 
-    <label>Employee ID:</label><br />
-    <input type="number" name="emp_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Employee ID:</label>
+        <input type="number" name="emp_id" class="form-control" required />
+    </div>
 
-    <label>Leave Type:</label><br />
-    <select name="leave_type">
-        <option value="Sick Leave">Sick Leave</option>
-        <option value="Casual Leave">Casual Leave</option>
-        <option value="Annual Leave">Annual Leave</option>
-    </select><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Leave Type:</label>
+        <select name="leave_type" class="form-select">
+            <option value="Sick Leave">Sick Leave</option>
+            <option value="Casual Leave">Casual Leave</option>
+            <option value="Annual Leave">Annual Leave</option>
+        </select>
+    </div>
 
-    <label>Start Date:</label><br />
-    <input type="date" name="start_date" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Start Date:</label>
+        <input type="date" name="start_date" class="form-control" required />
+    </div>
 
-    <label>End Date:</label><br />
-    <input type="date" name="end_date" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">End Date:</label>
+        <input type="date" name="end_date" class="form-control" required />
+    </div>
 
-    <label>Reason:</label><br />
-    <input type="text" name="reason" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Reason:</label>
+        <input type="text" name="reason" class="form-control" />
+    </div>
 
-    <label>Status:</label><br />
-    <select name="status">
-        <option value="Pending">Pending</option>
-        <option value="Approved">Approved</option>
-        <option value="Rejected">Rejected</option>
-    </select><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Status:</label>
+        <select name="status" class="form-select">
+            <option value="Pending">Pending</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+    </div>
 
-    <button type="submit">Submit Leave Request</button>
+    <button type="submit" class="btn btn-success">Submit Leave Request</button>
+    <a href="/Leave/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Leave/Index">Back to Leave List</a>

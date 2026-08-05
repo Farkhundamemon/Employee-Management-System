@@ -4,28 +4,36 @@
 
 <form method="post" action="/Attendance/Create">
 
-    <label>Employee ID:</label><br />
-    <input type="number" name="emp_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Employee ID:</label>
+        <input type="number" name="emp_id" class="form-control" required />
+    </div>
 
-    <label>Date:</label><br />
-    <input type="date" name="date" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Date:</label>
+        <input type="date" name="date" class="form-control" required />
+    </div>
 
-    <label>Check In:</label><br />
-    <input type="time" name="checkIn" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Check In:</label>
+        <input type="time" name="checkIn" class="form-control" />
+    </div>
 
-    <label>Check Out:</label><br />
-    <input type="time" name="checkOut" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Check Out:</label>
+        <input type="time" name="checkOut" class="form-control" />
+    </div>
 
-    <label>Status:</label><br />
-    <select name="status">
-        <option value="Present">Present</option>
-        <option value="Absent">Absent</option>
-        <option value="Late">Late</option>
-    </select><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Status:</label>
+        <select name="status" class="form-select">
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+            <option value="Late">Late</option>
+        </select>
+    </div>
 
-    <button type="submit">Add Attendance</button>
+    <button type="submit" class="btn btn-success">Add Attendance</button>
+    <a href="/Attendance/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Attendance/Index">Back to Attendance List</a>

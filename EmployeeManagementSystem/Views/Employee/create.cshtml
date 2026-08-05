@@ -4,33 +4,47 @@
 
 <form method="post" action="/Employee/Create">
 
-    <label>Full Name:</label><br />
-    <input type="text" name="emp_name" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Full Name:</label>
+        <input type="text" name="emp_name" class="form-control" required />
+    </div>
 
-    <label>Email:</label><br />
-    <input type="email" name="emp_email" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input type="email" name="emp_email" class="form-control" required />
+    </div>
 
-    <label>Phone:</label><br />
-    <input type="text" name="phone" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Phone:</label>
+        <input type="text" name="phone" class="form-control" />
+    </div>
 
-    <label>Department ID:</label><br />
-    <input type="number" name="Dep_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Department ID:</label>
+        <input type="number" name="Dep_id" class="form-control" required />
+    </div>
 
-    <label>Designation:</label><br />
-    <input type="text" name="designation" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Designation:</label>
+        <input type="text" name="designation" class="form-control" />
+    </div>
 
-    <label>Joining Date:</label><br />
-    <input type="date" name="joiningDate" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Joining Date:</label>
+        <input type="date" name="joiningDate" class="form-control" />
+    </div>
 
-    <label>Salary:</label><br />
-    <input type="number" step="0.01" name="salary" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Salary:</label>
+        <input type="number" step="0.01" name="salary" class="form-control" />
+    </div>
 
-    <label>Password:</label><br />
-    <input type="password" name="password" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input type="password" name="password" class="form-control" />
+    </div>
 
-    <button type="submit">Add Employee</button>
+    <button type="submit" class="btn btn-success">Add Employee</button>
+    <a href="/Employee/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a

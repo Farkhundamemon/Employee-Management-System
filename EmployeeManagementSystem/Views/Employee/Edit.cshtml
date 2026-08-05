@@ -6,33 +6,47 @@
 
     <input type="hidden" name="emp_id" value="@Model.emp_id" />
 
-    <label>Full Name:</label><br />
-    <input type="text" name="emp_name" value="@Model.emp_name" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Full Name:</label>
+        <input type="text" name="emp_name" value="@Model.emp_name" class="form-control" required />
+    </div>
 
-    <label>Email:</label><br />
-    <input type="email" name="emp_email" value="@Model.emp_email" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input type="email" name="emp_email" value="@Model.emp_email" class="form-control" required />
+    </div>
 
-    <label>Phone:</label><br />
-    <input type="text" name="phone" value="@Model.phone" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Phone:</label>
+        <input type="text" name="phone" value="@Model.phone" class="form-control" />
+    </div>
 
-    <label>Department ID:</label><br />
-    <input type="number" name="Dep_id" value="@Model.Dep_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Department ID:</label>
+        <input type="number" name="Dep_id" value="@Model.Dep_id" class="form-control" required />
+    </div>
 
-    <label>Designation:</label><br />
-    <input type="text" name="designation" value="@Model.designation" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Designation:</label>
+        <input type="text" name="designation" value="@Model.designation" class="form-control" />
+    </div>
 
-    <label>Joining Date:</label><br />
-    <input type="date" name="joiningDate" value="@Model.joiningDate.ToString("yyyy-MM-dd")" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Joining Date:</label>
+        <input type="date" name="joiningDate" value="@Model.joiningDate.ToString("yyyy-MM-dd")" class="form-control" />
+    </div>
 
-    <label>Salary:</label><br />
-    <input type="number" step="0.01" name="salary" value="@Model.salary" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Salary:</label>
+        <input type="number" step="0.01" name="salary" value="@Model.salary" class="form-control" />
+    </div>
 
-    <label>Password:</label><br />
-    <input type="password" name="password" value="@Model.password" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input type="password" name="password" value="@Model.password" class="form-control" />
+    </div>
 
-    <button type="submit">Update Employee</button>
+    <button type="submit" class="btn btn-success">Update Employee</button>
+    <a href="/Employee/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Employee/Index">Back to Employee List</a>

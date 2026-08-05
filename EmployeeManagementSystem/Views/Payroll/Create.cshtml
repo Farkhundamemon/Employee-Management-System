@@ -4,21 +4,27 @@
 
 <form method="post" action="/Payroll/Create">
 
-    <label>Employee ID:</label><br />
-    <input type="number" name="emp_id" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Employee ID:</label>
+        <input type="number" name="emp_id" class="form-control" required />
+    </div>
 
-    <label>Month:</label><br />
-    <input type="text" name="month" placeholder="e.g. January 2026" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Month:</label>
+        <input type="text" name="month" class="form-control" placeholder="e.g. January 2026" required />
+    </div>
 
-    <label>Basic Salary:</label><br />
-    <input type="number" step="0.01" name="basic_salary" required /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Basic Salary:</label>
+        <input type="number" step="0.01" name="basic_salary" class="form-control" required />
+    </div>
 
-    <label>Deduction:</label><br />
-    <input type="number" step="0.01" name="deduction" value="0" /><br /><br />
+    <div class="mb-3">
+        <label class="form-label">Deduction:</label>
+        <input type="number" step="0.01" name="deduction" class="form-control" value="0" />
+    </div>
 
-    <button type="submit">Add Payroll Record</button>
+    <button type="submit" class="btn btn-success">Add Payroll Record</button>
+    <a href="/Payroll/Index" class="btn btn-secondary">Cancel</a>
 
 </form>
-
-<br />
-<a href="/Payroll/Index">Back to Payroll List</a>
