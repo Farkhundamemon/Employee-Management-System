@@ -1,0 +1,21 @@
+﻿<h2>Employees by Department</h2>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Department Name</th>
+            <th>Number of Employees</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Report)
+        {
+            <tr>
+                <td>@item.DepartmentName</td>
+                <td>@item.EmployeeCount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Report/Index" class="btn btn-secondary">Back to Reports</a>
