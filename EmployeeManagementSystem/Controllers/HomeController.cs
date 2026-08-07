@@ -1,32 +1,30 @@
-using EmployeeManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using EmployeeManagementSystem.Models;
+using System.Linq;
 
 namespace EmployeeManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            ViewBag.TotalEmployees = _context.Employees.Count();
+            ViewBag.TotalDepartments = _context.Departments.Count();
+            ViewBag.PresentToday = _context.Attendances.Count(a => a.status == "Present");
+            ViewBag.PendingLeaves = _context.Leaves.Count(l => l.status == "Pending");
+            ViewBag.TotalPayroll = _context.Payrolls.Sum(p => (decimal?)p.net_salary) ?? 0;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            var recentEmployees = _context.Employees.OrderByDescending(e => e.emp_id).Take(5).ToList();
+            ViewBag.RecentEmployees = recentEmployees;
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

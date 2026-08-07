@@ -4,57 +4,300 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Employee Management System</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+            :root {
+                --navy: #1F2937;
+                --navy-dark: #16202C;
+                --accent: #E86A2C;
+                --accent-soft: #FCE8DD;
+                --bg: #F5F6F8;
+                --card: #FFFFFF;
+                --text: #26303B;
+                --text-soft: #6B7684;
+                --border: #E7E9EC;
+                --green: #2E9E6B;
+                --amber: #D9A125;
+                --red: #D2483A;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                background: var(--bg);
+                color: var(--text);
+                display: flex;
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                width: 230px;
+                background: var(--navy-dark);
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                flex-shrink: 0;
+            }
+
+                .sidebar .brand {
+                    padding: 22px 20px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    border-bottom: 1px solid rgba(255,255,255,0.08);
+                }
+
+                    .sidebar .brand span {
+                        color: var(--accent);
+                    }
+
+            .nav {
+                margin-top: 10px;
+                flex: 1;
+            }
+
+                .nav a {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 12px 20px;
+                    color: #B7C0CC;
+                    text-decoration: none;
+                    font-size: 14px;
+                    border-left: 3px solid transparent;
+                }
+
+                    .nav a:hover {
+                        background: rgba(255,255,255,0.04);
+                        color: #fff;
+                    }
+
+                    .nav a.active {
+                        background: rgba(232,106,44,0.12);
+                        border-left: 3px solid var(--accent);
+                        color: #fff;
+                        font-weight: 600;
+                    }
+
+                .nav .dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: currentColor;
+                    opacity: 0.6;
+                }
+
+            .sidebar .footer {
+                padding: 16px 20px;
+                font-size: 11px;
+                color: #6B7684;
+                border-top: 1px solid rgba(255,255,255,0.08);
+            }
+
+            .main {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+            }
+
+            .topbar {
+                background: var(--card);
+                padding: 14px 28px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--border);
+            }
+
+                .topbar h1 {
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+
+            .content {
+                padding: 26px 28px;
+            }
+
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .stat-card {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 18px;
+            }
+
+                .stat-card .label {
+                    font-size: 12px;
+                    color: var(--text-soft);
+                    text-transform: uppercase;
+                    letter-spacing: 0.4px;
+                }
+
+                .stat-card .value {
+                    font-size: 26px;
+                    font-weight: 700;
+                    margin-top: 6px;
+                }
+
+                .stat-card.accent .value {
+                    color: var(--accent);
+                }
+
+            .panel {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+                .panel h2 {
+                    font-size: 15px;
+                    font-weight: 700;
+                    margin-bottom: 14px;
+                }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 13px;
+            }
+
+            th {
+                text-align: left;
+                color: var(--text-soft);
+                font-weight: 600;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+                padding: 10px 12px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            td {
+                padding: 12px;
+                border-bottom: 1px solid var(--border);
+                vertical-align: middle;
+            }
+
+            tr:last-child td {
+                border-bottom: none;
+            }
+
+            .badge {
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 11px;
+                font-weight: 600;
+            }
+
+                .badge.active {
+                    background: #E4F5EC;
+                    color: var(--green);
+                }
+
+                .badge.leave {
+                    background: #FDF3E0;
+                    color: var(--amber);
+                }
+
+                .badge.pending {
+                    background: #FDECEA;
+                    color: var(--red);
+                }
+
+            .btn {
+                background: var(--accent);
+                color: #fff;
+                border: none;
+                padding: 9px 16px;
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+                .btn.outline {
+                    background: transparent;
+                    color: var(--text);
+                    border: 1px solid var(--border);
+                }
+
+            .toolbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+
+            .icon-btn {
+                background: none;
+                border: none;
+                color: var(--text-soft);
+                cursor: pointer;
+                font-size: 13px;
+                margin-right: 8px;
+                text-decoration: none;
+            }
+
+            .field label {
+                font-size: 12px;
+                color: var(--text-soft);
+                display: block;
+                margin-bottom: 6px;
+            }
+
+            .field {
+                margin-bottom: 14px;
+                max-width: 420px;
+            }
+
+                .field input, .field select {
+                    width: 100%;
+                    padding: 9px 12px;
+                    border: 1px solid var(--border);
+                    border-radius: 6px;
+                    font-size: 13px;
+                }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Employee Management System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Employee/Index">Employees</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Department/Index">Departments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Attendance/Index">Attendance</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Leave/Index">Leaves</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Payroll/Index">Payroll</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Report/Index">Reports</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="sidebar">
+        <div class="brand">Prim<span>Xact</span> HR</div>
+        <div class="nav">
+            <a href="/Home/Index"><span class="dot"></span> Dashboard</a>
+            <a href="/Employee/Index"><span class="dot"></span> Employees</a>
+            <a href="/Department/Index"><span class="dot"></span> Departments</a>
+            <a href="/Attendance/Index"><span class="dot"></span> Attendance</a>
+            <a href="/Leave/Index"><span class="dot"></span> Leave Management</a>
+            <a href="/Payroll/Index"><span class="dot"></span> Payroll</a>
+            <a href="/Report/Index"><span class="dot"></span> Reports</a>
+        </div>
+        <div class="footer">Employee Management System<br>v1.0 — Internship Project</div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Employee Management System - PrimXact Internship
+    <div class="main">
+        <div class="topbar">
+            <h1>@ViewData["Title"]</h1>
         </div>
-    </footer>
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

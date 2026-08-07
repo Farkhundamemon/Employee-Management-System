@@ -1,8 +1,43 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="stats">
+    <div class="stat-card">
+        <div class="label">Total Employees</div>
+        <div class="value">@ViewBag.TotalEmployees</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Departments</div>
+        <div class="value">@ViewBag.TotalDepartments</div>
+    </div>
+    <div class="stat-card accent">
+        <div class="label">Present Today</div>
+        <div class="value">@ViewBag.PresentToday</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Pending Leaves</div>
+        <div class="value">@ViewBag.PendingLeaves</div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>Total Net Payroll</h2>
+    <div class="value" style="font-size:22px; color:var(--accent);">Rs @ViewBag.TotalPayroll</div>
+</div>
+
+<div class="panel">
+    <h2>Recently Added Employees</h2>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Designation</th><th>Salary</th></tr>
+        @foreach (var emp in ViewBag.RecentEmployees)
+        {
+            <tr>
+                <td>@emp.emp_id</td>
+                <td>@emp.emp_name</td>
+                <td>@emp.designation</td>
+                <td>@emp.salary</td>
+            </tr>
+        }
+    </table>
 </div>
