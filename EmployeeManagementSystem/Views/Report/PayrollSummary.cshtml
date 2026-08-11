@@ -1,12 +1,20 @@
-﻿<h2>Payroll Summary</h2>
+﻿@{
+    ViewData["Title"] = "Payroll Summary";
+}
 
-<div class="card" style="max-width: 400px;">
-    <div class="card-body">
-        <p><strong>Total Payroll Records:</strong> @ViewBag.TotalRecords</p>
-        <p><strong>Total Deductions:</strong> @ViewBag.TotalDeductions</p>
-        <p><strong>Total Net Salary Paid:</strong> @ViewBag.TotalPaid</p>
+<a href="/Report/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Reports</a>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; max-width:700px;">
+    <div class="panel" style="padding:20px; border-left:4px solid #2E9E6B;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Total Records</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">@ViewBag.TotalRecords</div>
+    </div>
+    <div class="panel" style="padding:20px; border-left:4px solid #D2483A;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Total Deductions</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">Rs @ViewBag.TotalDeductions</div>
+    </div>
+    <div class="panel" style="padding:20px; border-left:4px solid #E86A2C;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Net Salary Paid</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">Rs @ViewBag.TotalPaid</div>
     </div>
 </div>
-
-<br />
-<a href="/Report/Index" class="btn btn-secondary">Back to Reports</a>

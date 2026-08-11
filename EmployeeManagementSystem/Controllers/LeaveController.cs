@@ -56,5 +56,27 @@ namespace EmployeeManagementSystem.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Approve(int id)
+        {
+            var leave = _context.Leaves.Find(id);
+            if (leave != null)
+            {
+                leave.status = "Approved";
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Reject(int id)
+        {
+            var leave = _context.Leaves.Find(id);
+            if (leave != null)
+            {
+                leave.status = "Rejected";
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

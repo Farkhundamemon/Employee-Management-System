@@ -1,39 +1,40 @@
 ﻿@model EmployeeManagementSystem.Models.Attendance
 
-<h2>Add Attendance</h2>
+@{
+    ViewData["Title"] = "Add Attendance";
+}
 
-<form method="post" action="/Attendance/Create">
+<a href="/Attendance/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Attendance</a>
 
-    <div class="mb-3">
-        <label class="form-label">Employee ID:</label>
-        <input type="number" name="emp_id" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Date:</label>
-        <input type="date" name="date" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Check In:</label>
-        <input type="time" name="checkIn" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Check Out:</label>
-        <input type="time" name="checkOut" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Status:</label>
-        <select name="status" class="form-select">
-            <option value="Present">Present</option>
-            <option value="Absent">Absent</option>
-            <option value="Late">Late</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-success">Add Attendance</button>
-    <a href="/Attendance/Index" class="btn btn-secondary">Cancel</a>
-
-</form>
+<div class="panel">
+    <form method="post" action="/Attendance/Create">
+        <div class="field">
+            <label>Employee ID</label>
+            <input type="number" name="emp_id" required />
+        </div>
+        <div class="field">
+            <label>Date</label>
+            <input type="date" name="date" required />
+        </div>
+        <div class="field">
+            <label>Check In</label>
+            <input type="time" name="checkIn" />
+        </div>
+        <div class="field">
+            <label>Check Out</label>
+            <input type="time" name="checkOut" />
+        </div>
+        <div class="field">
+            <label>Status</label>
+            <select name="status">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+                <option value="Late">Late</option>
+            </select>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+            <button type="submit" class="btn">Add Attendance</button>
+            <a href="/Attendance/Index" class="btn outline">Cancel</a>
+        </div>
+    </form>
+</div>

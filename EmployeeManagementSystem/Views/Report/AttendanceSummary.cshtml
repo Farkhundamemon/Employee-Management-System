@@ -1,12 +1,20 @@
-﻿<h2>Attendance Summary</h2>
+﻿@{
+    ViewData["Title"] = "Attendance Summary";
+}
 
-<div class="card" style="max-width: 400px;">
-    <div class="card-body">
-        <p><strong>Present:</strong> @ViewBag.Present</p>
-        <p><strong>Absent:</strong> @ViewBag.Absent</p>
-        <p><strong>Late:</strong> @ViewBag.Late</p>
+<a href="/Report/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Reports</a>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; max-width:700px;">
+    <div class="panel" style="padding:20px; border-left:4px solid #2E9E6B;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Present</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">@ViewBag.Present</div>
+    </div>
+    <div class="panel" style="padding:20px; border-left:4px solid #D2483A;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Absent</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">@ViewBag.Absent</div>
+    </div>
+    <div class="panel" style="padding:20px; border-left:4px solid #D9A125;">
+        <div style="color:var(--text-soft); font-size:12px; text-transform:uppercase;">Late</div>
+        <div style="font-size:26px; font-weight:700; margin-top:6px;">@ViewBag.Late</div>
     </div>
 </div>
-
-<br />
-<a href="/Report/Index" class="btn btn-secondary">Back to Reports</a>

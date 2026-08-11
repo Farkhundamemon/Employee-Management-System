@@ -37,7 +37,7 @@ namespace EmployeeManagementSystem.Controllers
                 HttpContext.Session.SetString("EmployeeEmail", employee.emp_email);
                 HttpContext.Session.SetInt32("EmployeeId", employee.emp_id);
                 HttpContext.Session.SetString("UserRole", "Employee");
-                return RedirectToAction("Dashboard", "Employee");
+                return RedirectToAction("Dashboard", "EmployeePortal");
             }
 
             ViewBag.Error = "Invalid username or password";

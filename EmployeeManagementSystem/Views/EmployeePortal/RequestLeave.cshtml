@@ -1,0 +1,147 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Request Leave</title>
+    <style>
+            :root {
+                --navy-dark: #16202C;
+                --accent: #E86A2C;
+                --bg: #F5F6F8;
+                --border: #E7E9EC;
+                --text: #26303B;
+                --text-soft: #6B7684;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                background: var(--bg);
+                color: var(--text);
+            }
+
+            .topbar {
+                background: var(--navy-dark);
+                color: #fff;
+                padding: 16px 28px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+                .topbar .brand {
+                    font-weight: 700;
+                    font-size: 16px;
+                }
+
+                    .topbar .brand span {
+                        color: var(--accent);
+                    }
+
+            .content {
+                padding: 28px 32px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .card {
+                background: #fff;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 24px;
+            }
+
+            .field {
+                margin-bottom: 16px;
+            }
+
+                .field label {
+                    font-size: 12.5px;
+                    font-weight: 600;
+                    color: var(--text-soft);
+                    display: block;
+                    margin-bottom: 6px;
+                }
+
+                .field input, .field select {
+                    width: 100%;
+                    padding: 9px 12px;
+                    border: 1px solid var(--border);
+                    border-radius: 6px;
+                    font-size: 13.5px;
+                }
+
+            .btn {
+                background: var(--accent);
+                color: #fff;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 6px;
+                font-size: 13.5px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+                .btn.outline {
+                    background: transparent;
+                    color: var(--text);
+                    border: 1px solid var(--border);
+                }
+
+            a {
+                color: var(--accent);
+                font-size: 13px;
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="brand">Prim<span>Xact</span> HR — My Portal</div>
+        <a href="/Account/Logout" style="color:#E8A9A0;">Logout</a>
+    </div>
+
+    <div class="content">
+        <a href="/EmployeePortal/Dashboard">&larr; Back to Dashboard</a>
+        <div class="card" style="margin-top:16px;">
+            <h2 style="margin-bottom:16px;">Request Leave</h2>
+            <form method="post" action="/EmployeePortal/RequestLeave">
+                <div class="field">
+                    <label>Leave Type</label>
+                    <select name="leave_type">
+                        <option value="Sick Leave">Sick Leave</option>
+                        <option value="Casual Leave">Casual Leave</option>
+                        <option value="Annual Leave">Annual Leave</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Start Date</label>
+                    <input type="date" name="start_date" required />
+                </div>
+                <div class="field">
+                    <label>End Date</label>
+                    <input type="date" name="end_date" required />
+                </div>
+                <div class="field">
+                    <label>Reason</label>
+                    <input type="text" name="reason" />
+                </div>
+                <button type="submit" class="btn">Submit Request</button>
+                <a href="/EmployeePortal/Dashboard" class="btn outline">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
