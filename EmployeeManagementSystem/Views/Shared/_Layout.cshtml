@@ -90,12 +90,63 @@
                     opacity: 0.6;
                 }
 
-            .sidebar .footer {
-                padding: 16px 20px;
-                font-size: 11px;
-                color: #6B7684;
+            .user-chip {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 20px 10px;
                 border-top: 1px solid rgba(255,255,255,0.08);
+                margin-top: 10px;
             }
+
+            .user-avatar {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: var(--accent);
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 12px;
+                flex-shrink: 0;
+            }
+
+            .user-info {
+                font-size: 12px;
+                color: #B7C0CC;
+                line-height: 1.4;
+            }
+
+                .user-info strong {
+                    color: #fff;
+                    display: block;
+                    font-size: 13px;
+                }
+
+            .logout-link {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 20px;
+                color: #E8A9A0;
+                text-decoration: none;
+                font-size: 13.5px;
+                font-weight: 600;
+                border-top: 1px solid rgba(255,255,255,0.08);
+                margin-top: 8px;
+                transition: background .15s;
+            }
+
+                .logout-link:hover {
+                    background: rgba(210,72,58,0.15);
+                    color: #fff;
+                }
+
+                .logout-link .ic {
+                    flex-shrink: 0;
+                }
 
             .main {
                 flex: 1;
@@ -286,12 +337,33 @@
             <a href="/Payroll/Index"><span class="dot"></span> Payroll</a>
             <a href="/Report/Index"><span class="dot"></span> Reports</a>
         </div>
-        <div class="footer">Employee Management System<br>v1.0 — Internship Project</div>
+
+        <div class="user-chip">
+            <div class="user-avatar">@(Context.Session.GetString("UserRole") == "Admin" ? "A" : "HR")</div>
+            <div class="user-info">
+                <strong>@(Context.Session.GetString("UserRole") ?? "Admin")</strong>
+                Signed in
+            </div>
+        </div>
+        <a href="/Account/Logout" class="logout-link">
+            <svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+        </a>
     </div>
 
     <div class="main">
         <div class="topbar">
             <h1>@ViewData["Title"]</h1>
+            <div style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text);">
+                <div style="width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;">
+                    @(Context.Session.GetString("UserRole") == "Admin" ? "A" : "HR")
+                </div>
+                <span>@(Context.Session.GetString("UserRole") ?? "Admin") </span>
+            </div>
         </div>
         <div class="content">
             @RenderBody()
