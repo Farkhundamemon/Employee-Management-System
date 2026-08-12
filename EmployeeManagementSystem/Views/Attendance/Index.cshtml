@@ -1,36 +1,54 @@
 ﻿@model List<EmployeeManagementSystem.Models.Attendance>
 
-<h2>Attendance List</h2>
+@{
+    ViewData["Title"] = "Attendance";
+}
 
-<a href="/Attendance/Create" class="btn btn-primary mb-3">+ Add New Attendance</a>
+<div class="panel" style="padding:0; overflow:hidden;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:9px; background:#FDF3E0; display:flex; align-items:center; justify-content:center; font-size:16px;">🕒</div>
+            <div>
+                <strong>Attendance Log</strong>
+                <div style="color:var(--text-soft); font-size:11.5px;">@Model.Count records</div>
+            </div>
+        </div>
+        <a href="/Attendance/Create" class="btn">+ Add Attendance</a>
+    </div>
 
-<table class="table table-striped table-bordered table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Employee ID</th>
-            <th>Date</th>
-            <th>Check In</th>
-            <th>Check Out</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var att in Model)
-        {
+    @if (Model.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No attendance records yet. Click "Add Attendance" to get started.</div>
+    }
+    else
+    {
+        <table>
             <tr>
-                <td>@att.attentence_id</td>
-                <td>@att.emp_id</td>
-                <td>@att.date.ToString("dd-MM-yyyy")</td>
-                <td>@att.checkIn</td>
-                <td>@att.checkOut</td>
-                <td>@att.status</td>
-                <td>
-                    <a href="/Attendance/Edit/@att.attentence_id" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="/Attendance/Delete/@att.attentence_id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
-                </td>
+                <th>Employee ID</th>
+                <th>Date</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+            @foreach (var att in Model)
+            {
+                var badgeColor = att.status == "Present" ? "#E4F5EC" : att.status == "Absent" ? "#FDECEA" : "#FDF3E0";
+                var textColor = att.status == "Present" ? "#2E9E6B" : att.status == "Absent" ? "#D2483A" : "#D9A125";
+                <tr>
+                    <td>@att.emp_id</td>
+                    <td>@att.date.ToString("dd-MM-yyyy")</td>
+                    <td>@att.checkIn</td>
+                    <td>@att.checkOut</td>
+                    <td>
+                        <span style="background:@badgeColor; color:@textColor; padding:4px 12px; border-radius:20px; font-size:11.5px; font-weight:600;">@att.status</span>
+                    </td>
+                    <td>
+                        <a href="/Attendance/Edit/@att.attentence_id" class="icon-btn" style="color:#5B8DEF; font-weight:600;">Edit</a>
+                        <a href="/Attendance/Delete/@att.attentence_id" class="icon-btn" style="color:#D2483A; font-weight:600;" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

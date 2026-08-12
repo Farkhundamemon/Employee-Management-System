@@ -13,10 +13,17 @@ namespace EmployeeManagementSystem.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var employees = _context.Employees.ToList();
-            return View(employees);
+            var employees = _context.Employees.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                employees = employees.Where(e => e.emp_name.Contains(search) || e.emp_email.Contains(search));
+            }
+
+            ViewBag.Search = search;
+            return View(employees.ToList());
         }
 
         public IActionResult Create()
@@ -27,6 +34,7 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult Create(Employee emp)
         {
+            emp.status = "Active";
             _context.Employees.Add(emp);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -41,19 +49,64 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult Edit(Employee emp)
         {
-            _context.Employees.Update(emp);
-            _context.SaveChanges();
+            var existing = _context.Employees.Find(emp.emp_id);
+            if (existing != null)
+            {
+                existing.emp_name = emp.emp_name;
+                existing.emp_email = emp.emp_email;
+                existing.phone = emp.phone;
+                existing.Dep_id = emp.Dep_id;
+                existing.designation = emp.designation;
+                existing.joiningDate = emp.joiningDate;
+                existing.salary = emp.salary;
+                existing.password = emp.password;
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Deactivate(int id)
         {
             var emp = _context.Employees.Find(id);
-            if (emp != null)
+            if (emp == null) return RedirectToAction("Index");
+
+            if (emp.status == "Deactivated")
             {
-                _context.Employees.Remove(emp);
-                _context.SaveChanges();
+                TempData["Message"] = "This employee is already deactivated.";
+                return RedirectToAction("Index");
             }
+
+            emp.status = "Deactivated";
+            _context.SaveChanges();
+            TempData["Message"] = "Employee has been deactivated successfully.";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Terminate(int id)
+        {
+            var emp = _context.Employees.Find(id);
+            if (emp == null) return RedirectToAction("Index");
+
+            if (emp.status == "Terminated")
+            {
+                TempData["Message"] = "This employee is already terminated. No further action is required.";
+                return RedirectToAction("Index");
+            }
+
+            emp.status = "Terminated";
+            _context.SaveChanges();
+            TempData["Message"] = "Employee has been terminated successfully.";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Reactivate(int id)
+        {
+            var emp = _context.Employees.Find(id);
+            if (emp == null) return RedirectToAction("Index");
+
+            emp.status = "Active";
+            _context.SaveChanges();
+            TempData["Message"] = "Employee has been reactivated successfully and can now access the system.";
             return RedirectToAction("Index");
         }
     }

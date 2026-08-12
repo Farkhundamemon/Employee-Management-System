@@ -22,5 +22,7 @@ namespace EmployeeManagementSystem.Models
         public decimal salary { get; set; }
 
         public string password { get; set; }
+
+        public string status { get; set; } = "Active";
     }
 }

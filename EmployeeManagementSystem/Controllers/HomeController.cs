@@ -16,6 +16,9 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult Index()
         {
             ViewBag.TotalEmployees = _context.Employees.Count();
+            ViewBag.ActiveEmployees = _context.Employees.Count(e => e.status == "Active");
+            ViewBag.DeactivatedEmployees = _context.Employees.Count(e => e.status == "Deactivated");
+            ViewBag.TerminatedEmployees = _context.Employees.Count(e => e.status == "Terminated");
             ViewBag.TotalDepartments = _context.Departments.Count();
             ViewBag.PresentToday = _context.Attendances.Count(a => a.status == "Present");
             ViewBag.PendingLeaves = _context.Leaves.Count(l => l.status == "Pending");

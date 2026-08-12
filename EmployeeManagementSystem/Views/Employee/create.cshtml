@@ -4,45 +4,47 @@
     ViewData["Title"] = "Add Employee";
 }
 
-<a href="/Employee/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Employees</a>
+<div style="max-width:500px; margin:0 auto;">
+    <a href="/Employee/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Employees</a>
 
-<div class="panel">
-    <form method="post" action="/Employee/Create">
-        <div class="field">
-            <label>Full Name</label>
-            <input type="text" name="emp_name" placeholder="e.g. Ali Khan" required />
-        </div>
-        <div class="field">
-            <label>Email</label>
-            <input type="email" name="emp_email" placeholder="e.g. ali@test.com" required />
-        </div>
-        <div class="field">
-            <label>Phone</label>
-            <input type="text" name="phone" />
-        </div>
-        <div class="field">
-            <label>Department ID</label>
-            <input type="number" name="Dep_id" required />
-        </div>
-        <div class="field">
-            <label>Designation</label>
-            <input type="text" name="designation" />
-        </div>
-        <div class="field">
-            <label>Joining Date</label>
-            <input type="date" name="joiningDate" />
-        </div>
-        <div class="field">
-            <label>Salary</label>
-            <input type="number" step="0.01" name="salary" />
-        </div>
-        <div class="field">
-            <label>Password</label>
-            <input type="password" name="password" />
-        </div>
-        <div style="display:flex; gap:10px; margin-top:20px;">
-            <button type="submit" class="btn">Add Employee</button>
-            <a href="/Employee/Index" class="btn outline">Cancel</a>
-        </div>
-    </form>
+    <div class="panel">
+        <form method="post" action="/Employee/Create">
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" name="emp_name" placeholder="e.g. Ali Khan" required />
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="emp_email" placeholder="e.g. ali@test.com" required />
+            </div>
+            <div class="field">
+                <label>Phone</label>
+                <input type="text" name="phone" />
+            </div>
+            <div class="field">
+                <label>Department ID</label>
+                <input type="number" name="Dep_id" required />
+            </div>
+            <div class="field">
+                <label>Designation</label>
+                <input type="text" name="designation" />
+            </div>
+            <div class="field">
+                <label>Joining Date</label>
+                <input type="date" name="joiningDate" />
+            </div>
+            <div class="field">
+                <label>Salary</label>
+                <input type="number" step="0.01" name="salary" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" />
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn">Add Employee</button>
+                <a href="/Employee/Index" class="btn outline">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>

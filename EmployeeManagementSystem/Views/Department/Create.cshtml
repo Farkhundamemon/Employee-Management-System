@@ -4,17 +4,19 @@
     ViewData["Title"] = "Add Department";
 }
 
-<a href="/Department/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Departments</a>
+<div style="max-width:500px; margin:0 auto;">
+    <a href="/Department/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Departments</a>
 
-<div class="panel">
-    <form method="post" action="/Department/Create">
-        <div class="field">
-            <label>Department Name</label>
-            <input type="text" name="Dep_name" placeholder="e.g. IT" required />
-        </div>
-        <div style="display:flex; gap:10px; margin-top:20px;">
-            <button type="submit" class="btn">Add Department</button>
-            <a href="/Department/Index" class="btn outline">Cancel</a>
-        </div>
-    </form>
+    <div class="panel">
+        <form method="post" action="/Department/Create">
+            <div class="field">
+                <label>Department Name</label>
+                <input type="text" name="Dep_name" placeholder="e.g. IT" required />
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn">Add Department</button>
+                <a href="/Department/Index" class="btn outline">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>

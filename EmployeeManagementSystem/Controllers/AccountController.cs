@@ -34,6 +34,12 @@ namespace EmployeeManagementSystem.Controllers
 
             if (employee != null)
             {
+                if (employee.status == "Deactivated" || employee.status == "Terminated")
+                {
+                    ViewBag.Error = "Your account has been " + employee.status.ToLower() + ". Please contact HR for assistance.";
+                    return View();
+                }
+
                 HttpContext.Session.SetString("EmployeeEmail", employee.emp_email);
                 HttpContext.Session.SetInt32("EmployeeId", employee.emp_id);
                 HttpContext.Session.SetString("UserRole", "Employee");

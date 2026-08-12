@@ -1,38 +1,177 @@
 ﻿@model List<EmployeeManagementSystem.Models.Employee>
 
-<h2>Employee List</h2>
+@{
+    ViewData["Title"] = "Employees";
+}
 
-<a href="/Employee/Create" class="btn btn-primary mb-3">+ Add New Employee</a>
+@if (TempData["Message"] != null)
+{
+    <div style="background:#E4F5EC; color:#2E9E6B; padding:12px 18px; border-radius:8px; margin-bottom:16px; font-size:13.5px; font-weight:600;">
+        ✓ @TempData["Message"]
+    </div>
+}
 
-<table class="table table-striped table-bordered table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Designation</th>
-            <th>Joining Date</th>
-            <th>Salary</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var emp in Model)
-        {
-            <tr>
-                <td>@emp.emp_id</td>
-                <td>@emp.emp_name</td>
-                <td>@emp.emp_email</td>
-                <td>@emp.phone</td>
-                <td>@emp.designation</td>
-                <td>@emp.joiningDate.ToString("dd-MM-yyyy")</td>
-                <td>@emp.salary</td>
-                <td>
-                    <a href="/Employee/Edit/@emp.emp_id" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="/Employee/Delete/@emp.emp_id" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
-                </td>
-            </tr>
+<style>
+    .search-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #FAFBFC;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        padding: 0 6px 0 12px;
+        width: 260px;
+        transition: .15s;
+    }
+
+        .search-wrap:focus-within {
+            border-color: var(--accent);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(232,106,44,0.1);
         }
-    </tbody>
-</table>
+
+        .search-wrap .icon {
+            font-size: 13px;
+            color: var(--text-soft);
+            flex-shrink: 0;
+        }
+
+        .search-wrap input {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 9px 4px;
+            font-size: 13px;
+            flex: 1;
+            min-width: 0;
+            color: var(--text);
+        }
+
+        .search-wrap .clear-x {
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 4px 6px;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+
+            .search-wrap .clear-x:hover {
+                background: var(--border);
+                color: var(--text);
+            }
+</style>
+
+<div class="panel" style="padding:0; overflow:visible;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:9px; background:#EAF1FE; display:flex; align-items:center; justify-content:center; font-size:16px;">👥</div>
+            <div>
+                <strong>All Employees</strong>
+                <div style="color:var(--text-soft); font-size:11.5px;">@Model.Count total</div>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+            <form method="get" action="/Employee/Index">
+                <div class="search-wrap">
+                    <span class="icon">🔍</span>
+                    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search by name or email..." />
+                    @if (!string.IsNullOrEmpty((string)ViewBag.Search))
+                    {
+                        <a href="/Employee/Index" class="clear-x" title="Clear search">✕</a>
+                    }
+                </div>
+            </form>
+            <a href="/Employee/Create" class="btn">+ Add Employee</a>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No employees found.</div>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>Employee</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Designation</th>
+                <th>Status</th>
+                <th>Joining Date</th>
+                <th>Salary</th>
+                <th>Action</th>
+            </tr>
+            @foreach (var emp in Model)
+            {
+                var colors = new[] { "#5B8DEF", "#9B6FD1", "#2E9E6B", "#D9A125", "#D2483A", "#E86A2C" };
+                var color = colors[emp.emp_id % colors.Length];
+                <tr>
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="width:32px; height:32px; border-radius:50%; background:@(color)22; color:@color; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;">
+                                @(emp.emp_name.Length > 0 ? emp.emp_name.Substring(0, 1).ToUpper() : "E")
+                            </div>
+                            <div>
+                                <div style="font-weight:600;">@emp.emp_name</div>
+                                <div style="font-size:11px; color:var(--text-soft);">ID: @emp.emp_id</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>@emp.emp_email</td>
+                    <td>@emp.phone</td>
+                    <td>
+                        <span style="background:var(--accent-soft); color:#B85A24; padding:3px 11px; border-radius:20px; font-size:11.5px; font-weight:600;">@emp.designation</span>
+                    </td>
+                    <td>
+                        @{
+                            var statusBg = emp.status == "Active" ? "#E4F5EC" : emp.status == "Deactivated" ? "#FDF3E0" : "#FDECEA";
+                            var statusText = emp.status == "Active" ? "#2E9E6B" : emp.status == "Deactivated" ? "#B8860B" : "#B0483F";
+                        }
+                        <span style="background:@statusBg; color:@statusText; padding:3px 11px; border-radius:20px; font-size:11.5px; font-weight:600;">@emp.status</span>
+                    </td>
+                    <td>@emp.joiningDate.ToString("dd-MM-yyyy")</td>
+                    <td><strong>Rs @emp.salary</strong></td>
+                    <td style="position:relative;">
+                        <a href="/Employee/Edit/@emp.emp_id" class="icon-btn" style="color:#5B8DEF; font-weight:600;">Edit</a>
+
+                        <div style="position:relative; display:inline-block;">
+                            <button type="button" onclick="toggleMenu(@emp.emp_id)" class="icon-btn" style="color:var(--text-soft); font-weight:600; background:none; border:none; cursor:pointer; font-size:13px;">
+                                Change Status ▾
+                            </button>
+                            <div id="menu-@emp.emp_id" style="display:none; position:absolute; right:0; top:26px; background:#fff; border:1px solid var(--border); border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.12); z-index:10; min-width:170px; overflow:hidden;">
+                                @if (emp.status != "Deactivated" && emp.status != "Terminated")
+                                {
+                                    <a href="/Employee/Deactivate/@emp.emp_id" onclick="return confirm('Deactivate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#B8860B; text-decoration:none;">🟡 Deactivate Employee</a>
+                                    <a href="/Employee/Terminate/@emp.emp_id" onclick="return confirm('Terminate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#B0483F; text-decoration:none; border-top:1px solid var(--border);">🔴 Terminate Employee</a>
+                                }
+                                @if (emp.status == "Deactivated" || emp.status == "Terminated")
+                                {
+                                    <a href="/Employee/Reactivate/@emp.emp_id" onclick="return confirm('Reactivate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#2E9E6B; text-decoration:none;">🟢 Reactivate Employee</a>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+<script>
+    function toggleMenu(id) {
+        var menu = document.getElementById('menu-' + id);
+        var allMenus = document.querySelectorAll('[id^="menu-"]');
+        allMenus.forEach(function(m) {
+            if (m.id !== 'menu-' + id) m.style.display = 'none';
+        });
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('[onclick^="toggleMenu"]')) {
+            document.querySelectorAll('[id^="menu-"]').forEach(function(m) { m.style.display = 'none'; });
+        }
+    });
+</script>
