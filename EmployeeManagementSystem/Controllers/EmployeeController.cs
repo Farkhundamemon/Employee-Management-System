@@ -29,6 +29,7 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult Create()
         {
             ViewBag.Designations = _context.Designations.ToList();
+            ViewBag.Managers = _context.Employees.ToList();
             return View();
         }
 
@@ -45,9 +46,11 @@ namespace EmployeeManagementSystem.Controllers
         {
             var emp = _context.Employees.Find(id);
             ViewBag.Designations = _context.Designations.ToList();
+            ViewBag.Managers = _context.Employees.Where(e => e.emp_id != id).ToList();
             return View(emp);
         }
 
+        [HttpPost]
         [HttpPost]
         public IActionResult Edit(Employee emp)
         {
@@ -62,6 +65,7 @@ namespace EmployeeManagementSystem.Controllers
                 existing.joiningDate = emp.joiningDate;
                 existing.salary = emp.salary;
                 existing.password = emp.password;
+                existing.reporting_manager_id = emp.reporting_manager_id;
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");

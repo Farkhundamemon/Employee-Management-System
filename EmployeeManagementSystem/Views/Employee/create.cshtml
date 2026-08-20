@@ -36,6 +36,16 @@
                 </select>
             </div>
             <div class="field">
+                <label>Reporting Manager (Optional)</label>
+                <select name="reporting_manager_id">
+                    <option value="">-- No Manager / N/A --</option>
+                    @foreach (var m in ViewBag.Managers)
+                    {
+                        <option value="@m.emp_id">@m.emp_name</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
                 <label>Joining Date</label>
                 <input type="date" name="joiningDate" />
             </div>

@@ -24,5 +24,6 @@ namespace EmployeeManagementSystem.Models
         public string password { get; set; }
 
         public string status { get; set; } = "Active";
+        public int? reporting_manager_id { get; set; }
     }
 }
