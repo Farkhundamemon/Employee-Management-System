@@ -20,5 +20,8 @@ namespace EmployeeManagementSystem.Models
         public string reason { get; set; }
 
         public string status { get; set; }
+        public string? approved_by { get; set; }
+
+        public DateTime? approved_date { get; set; }
     }
 }

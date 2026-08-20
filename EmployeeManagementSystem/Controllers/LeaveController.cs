@@ -63,6 +63,8 @@ namespace EmployeeManagementSystem.Controllers
             if (leave != null)
             {
                 leave.status = "Approved";
+                leave.approved_by = HttpContext.Session.GetString("AdminUsername") ?? "Admin";
+                leave.approved_date = DateTime.Now;
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
@@ -74,6 +76,8 @@ namespace EmployeeManagementSystem.Controllers
             if (leave != null)
             {
                 leave.status = "Rejected";
+                leave.approved_by = HttpContext.Session.GetString("AdminUsername") ?? "Admin";
+                leave.approved_date = DateTime.Now;
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
