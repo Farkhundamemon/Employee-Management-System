@@ -1,52 +1,79 @@
 ﻿@model EmployeeManagementSystem.Models.Employee
 
-<h2>Edit Employee</h2>
+@{
+    ViewData["Title"] = "Edit Employee";
+}
 
-<form method="post" action="/Employee/Edit">
+<div style="max-width:500px; margin:0 auto;">
+    <a href="/Employee/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Employees</a>
 
-    <input type="hidden" name="emp_id" value="@Model.emp_id" />
-
-    <div class="mb-3">
-        <label class="form-label">Full Name:</label>
-        <input type="text" name="emp_name" value="@Model.emp_name" class="form-control" required />
+    <div class="panel">
+        <form method="post" action="/Employee/Edit">
+            <input type="hidden" name="emp_id" value="@Model.emp_id" />
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" name="emp_name" value="@Model.emp_name" required />
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="emp_email" value="@Model.emp_email" required />
+            </div>
+            <div class="field">
+                <label>Phone</label>
+                <input type="text" name="phone" value="@Model.phone" />
+            </div>
+            <div class="field">
+                <label>Department ID</label>
+                <input type="number" name="Dep_id" value="@Model.Dep_id" required />
+            </div>
+            <div class="field">
+                <label>Designation</label>
+                <select name="designation">
+                    <option value="">-- Select Designation --</option>
+                    @foreach (var d in ViewBag.Designations)
+                    {
+                        <option value="@d.title" selected="@(d.title == Model.designation)">@d.title</option>
+                    }
+                </select>
+            </div>
+            <div class="field">
+                <label>Joining Date</label>
+                <input type="date" name="joiningDate" value="@Model.joiningDate.ToString("yyyy-MM-dd")" />
+            </div>
+            <div class="field">
+                <label>Salary</label>
+                <input type="number" step="0.01" name="salary" value="@Model.salary" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <div style="position:relative;">
+                    <input type="password" name="password" id="passwordField" value="@Model.password" style="padding-right:40px;" />
+                    <button type="button" onclick="togglePassword()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; color:var(--text-soft); display:flex; align-items:center;">
+                        <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn">Update Employee</button>
+                <a href="/Employee/Index" class="btn outline">Cancel</a>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label class="form-label">Email:</label>
-        <input type="email" name="emp_email" value="@Model.emp_email" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Phone:</label>
-        <input type="text" name="phone" value="@Model.phone" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Department ID:</label>
-        <input type="number" name="Dep_id" value="@Model.Dep_id" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Designation:</label>
-        <input type="text" name="designation" value="@Model.designation" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Joining Date:</label>
-        <input type="date" name="joiningDate" value="@Model.joiningDate.ToString("yyyy-MM-dd")" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Salary:</label>
-        <input type="number" step="0.01" name="salary" value="@Model.salary" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Password:</label>
-        <input type="password" name="password" value="@Model.password" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-success">Update Employee</button>
-    <a href="/Employee/Index" class="btn btn-secondary">Cancel</a>
-
-</form>
+<script>
+    function togglePassword() {
+        var field = document.getElementById('passwordField');
+        var icon = document.getElementById('eyeIcon');
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+        } else {
+            field.type = 'password';
+            icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+        }
+    }
+</script>

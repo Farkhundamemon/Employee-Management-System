@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Department Summary";
+}
+
+<a href="/Report/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Reports</a>
+
+<div class="panel" style="padding:0; overflow:hidden;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+        <div style="width:34px; height:34px; border-radius:9px; background:#ECEAFB; display:flex; align-items:center; justify-content:center; font-size:16px;">🏛️</div>
+        <strong>Department Summary</strong>
+    </div>
+
+    @if (ViewBag.Summary.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No departments found.</div>
+    }
+    else
+    {
+        <table>
+            <tr><th>Department</th><th>Total Employees</th><th>Active Employees</th></tr>
+            @foreach (var d in ViewBag.Summary)
+            {
+                <tr>
+                    <td><strong>@d.DepartmentName</strong></td>
+                    <td><span style="background:#ECEAFB; color:#6B5FCF; padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600;">@d.TotalEmployees</span></td>
+                    <td><span style="background:#E4F5EC; color:#2E9E6B; padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600;">@d.ActiveEmployees</span></td>
+                </tr>
+            }
+        </table>
+    }
+</div>

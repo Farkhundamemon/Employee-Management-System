@@ -27,7 +27,13 @@
             </div>
             <div class="field">
                 <label>Designation</label>
-                <input type="text" name="designation" />
+                <select name="designation">
+                    <option value="">-- Select Designation --</option>
+                    @foreach (var d in ViewBag.Designations)
+                    {
+                        <option value="@d.title">@d.title</option>
+                    }
+                </select>
             </div>
             <div class="field">
                 <label>Joining Date</label>

@@ -28,6 +28,7 @@ namespace EmployeeManagementSystem.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Designations = _context.Designations.ToList();
             return View();
         }
 
@@ -43,6 +44,7 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult Edit(int id)
         {
             var emp = _context.Employees.Find(id);
+            ViewBag.Designations = _context.Designations.ToList();
             return View(emp);
         }
 
@@ -76,7 +78,18 @@ namespace EmployeeManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
 
+            var oldStatus = emp.status;
             emp.status = "Deactivated";
+
+            _context.EmployeeStatusHistories.Add(new EmployeeStatusHistory
+            {
+                emp_id = emp.emp_id,
+                old_status = oldStatus,
+                new_status = "Deactivated",
+                changed_by = HttpContext.Session.GetString("AdminUsername") ?? "Admin",
+                changed_date = DateTime.Now
+            });
+
             _context.SaveChanges();
             TempData["Message"] = "Employee has been deactivated successfully.";
             return RedirectToAction("Index");
@@ -93,7 +106,18 @@ namespace EmployeeManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
 
+            var oldStatus = emp.status;
             emp.status = "Terminated";
+
+            _context.EmployeeStatusHistories.Add(new EmployeeStatusHistory
+            {
+                emp_id = emp.emp_id,
+                old_status = oldStatus,
+                new_status = "Terminated",
+                changed_by = HttpContext.Session.GetString("AdminUsername") ?? "Admin",
+                changed_date = DateTime.Now
+            });
+
             _context.SaveChanges();
             TempData["Message"] = "Employee has been terminated successfully.";
             return RedirectToAction("Index");
@@ -104,7 +128,18 @@ namespace EmployeeManagementSystem.Controllers
             var emp = _context.Employees.Find(id);
             if (emp == null) return RedirectToAction("Index");
 
+            var oldStatus = emp.status;
             emp.status = "Active";
+
+            _context.EmployeeStatusHistories.Add(new EmployeeStatusHistory
+            {
+                emp_id = emp.emp_id,
+                old_status = oldStatus,
+                new_status = "Active",
+                changed_by = HttpContext.Session.GetString("AdminUsername") ?? "Admin",
+                changed_date = DateTime.Now
+            });
+
             _context.SaveChanges();
             TempData["Message"] = "Employee has been reactivated successfully and can now access the system.";
             return RedirectToAction("Index");

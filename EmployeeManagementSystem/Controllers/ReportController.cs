@@ -18,7 +18,6 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
-        // Report 1 Employees per Department
         public IActionResult EmployeesByDepartment()
         {
             var report = _context.Employees
@@ -44,7 +43,6 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
-        // Report 2 Payroll Summary
         public IActionResult PayrollSummary()
         {
             var totalPaid = _context.Payrolls.Sum(p => (decimal?)p.net_salary) ?? 0;
@@ -58,7 +56,6 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
-        // Report 3 Leave Summary
         public IActionResult LeaveSummary()
         {
             var pending = _context.Leaves.Count(l => l.status == "Pending");
@@ -72,7 +69,6 @@ namespace EmployeeManagementSystem.Controllers
             return View();
         }
 
-        // Report 4: Attendance Summary
         public IActionResult AttendanceSummary()
         {
             var present = _context.Attendances.Count(a => a.status == "Present");
@@ -83,6 +79,61 @@ namespace EmployeeManagementSystem.Controllers
             ViewBag.Absent = absent;
             ViewBag.Late = late;
 
+            return View();
+        }
+
+        public IActionResult ActiveEmployees()
+        {
+            var employees = _context.Employees.Where(e => e.status == "Active").ToList();
+            var departments = _context.Departments.ToList();
+
+            ViewBag.Employees = employees;
+            ViewBag.Departments = departments;
+            return View();
+        }
+
+        public IActionResult TerminatedEmployees()
+        {
+            var employees = _context.Employees.Where(e => e.status == "Terminated").ToList();
+            var departments = _context.Departments.ToList();
+
+            ViewBag.Employees = employees;
+            ViewBag.Departments = departments;
+            return View();
+        }
+        public IActionResult DeactivatedEmployees()
+        {
+            var employees = _context.Employees.Where(e => e.status == "Deactivated").ToList();
+            var departments = _context.Departments.ToList();
+
+            ViewBag.Employees = employees;
+            ViewBag.Departments = departments;
+            return View();
+        }
+
+        public IActionResult DepartmentSummary()
+        {
+            var departments = _context.Departments.ToList();
+            var employees = _context.Employees.ToList();
+
+            var summary = departments.Select(d => new
+            {
+                DepartmentName = d.Dep_name,
+                TotalEmployees = employees.Count(e => e.Dep_id == d.Dep_id),
+                ActiveEmployees = employees.Count(e => e.Dep_id == d.Dep_id && e.status == "Active")
+            }).ToList();
+
+            ViewBag.Summary = summary;
+            return View();
+        }
+
+        public IActionResult StatusHistory()
+        {
+            var history = _context.EmployeeStatusHistories.OrderByDescending(h => h.changed_date).ToList();
+            var employees = _context.Employees.ToList();
+
+            ViewBag.History = history;
+            ViewBag.Employees = employees;
             return View();
         }
     }

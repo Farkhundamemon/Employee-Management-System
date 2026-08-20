@@ -9,354 +9,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Dashboard - Employee Management System</title>
     <style>
-            :root {
-                --navy: #16202C;
-                --navy-2: #1F2937;
-                --accent: #E86A2C;
-                --accent-soft: #FCE8DD;
-                --bg: #F5F6F8;
-                --card: #FFFFFF;
-                --text: #26303B;
-                --text-soft: #6B7684;
-                --border: #E7E9EC;
-                --green: #2E9E6B;
-                --green-soft: #E4F5EC;
-                --amber: #D9A125;
-                --amber-soft: #FDF3E0;
-                --red: #D2483A;
-                --red-soft: #FDECEA;
-            }
+        :root{
+            --navy:#16202C; --navy-2:#1F2937; --accent:#E86A2C; --accent-soft:#FCE8DD;
+            --bg:#F5F6F8; --card:#FFFFFF; --text:#26303B; --text-soft:#6B7684; --border:#E7E9EC;
+            --green:#2E9E6B; --green-soft:#E4F5EC; --amber:#D9A125; --amber-soft:#FDF3E0;
+            --red:#D2483A; --red-soft:#FDECEA;
+        }
+        *{box-sizing:border-box; margin:0; padding:0;}
+        body{ font-family:'Segoe UI', Arial, sans-serif; background:var(--bg); color:var(--text); }
 
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
+        .topbar{
+            background: linear-gradient(120deg, var(--navy), var(--navy-2));
+            color:#fff; padding:0; position:relative; overflow:hidden;
+        }
+        .topbar-inner{
+            display:flex; justify-content:space-between; align-items:center;
+            padding:18px 32px; position:relative; z-index:2;
+        }
+        .topbar::after{
+            content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity:.35;
+        }
+        .brand{ font-weight:700; font-size:16px; }
+        .brand span{ color:var(--accent); }
+        .logout-btn{
+            color:#F3C9BE; text-decoration:none; font-size:12.5px; font-weight:600;
+            border:1px solid rgba(243,201,190,0.35); padding:7px 14px; border-radius:7px;
+        }
+        .logout-btn:hover{ background:rgba(210,72,58,0.2); color:#fff; }
 
-            body {
-                font-family: 'Segoe UI', Arial, sans-serif;
-                background: var(--bg);
-                color: var(--text);
-            }
+        .hero{
+            background: linear-gradient(120deg, var(--navy), var(--navy-2));
+            color:#fff; padding:0 32px 34px; position:relative;
+        }
+        .hero-inner{ display:flex; align-items:center; gap:16px; position:relative; z-index:2; }
+        .avatar-big{
+            width:56px; height:56px; border-radius:50%;
+            background: radial-gradient(circle at 65% 35%, var(--accent), #B84E20);
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:20px; flex-shrink:0;
+        }
+        .hero h1{ font-size:21px; font-weight:700; }
+        .hero p{ font-size:13px; color:#B7C0CC; margin-top:2px; }
 
-            .topbar {
-                background: linear-gradient(120deg, var(--navy), var(--navy-2));
-                color: #fff;
-                padding: 0;
-                position: relative;
-                overflow: hidden;
-            }
+        .content{ padding:0 32px 40px; max-width:800px; margin:-20px auto 0; position:relative; z-index:3; }
 
-            .topbar-inner {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 18px 32px;
-                position: relative;
-                z-index: 2;
-            }
+        .card{
+            background:var(--card); border:1px solid var(--border); border-radius:12px; padding:22px;
+            margin-bottom:20px; box-shadow: 0 6px 18px rgba(22,32,44,0.05);
+        }
+        .card-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+        .card-head h3{ font-size:15px; font-weight:700; }
+        .btn-mini{
+            background:var(--accent); color:#fff; text-decoration:none; font-size:11.5px; font-weight:600;
+            padding:7px 13px; border-radius:7px;
+        }
+        .btn-mini:hover{ background:#D25E22; }
 
-            .topbar::after {
-                content: '';
-                position: absolute;
-                right: -60px;
-                top: -60px;
-                width: 220px;
-                height: 220px;
-                background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-                opacity: .35;
-            }
+        table{ width:100%; border-collapse:collapse; font-size:13px; }
+        th{ text-align:left; color:var(--text-soft); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.3px; padding:9px 10px; border-bottom:1px solid var(--border); }
+        td{ padding:11px 10px; border-bottom:1px solid var(--border); }
+        tr:last-child td{ border-bottom:none; }
 
-            .brand {
-                font-weight: 700;
-                font-size: 16px;
-            }
+        .badge{ padding:4px 11px; border-radius:20px; font-size:11px; font-weight:600; }
+        .badge.approved{ background:var(--green-soft); color:var(--green); }
+        .badge.rejected{ background:var(--red-soft); color:var(--red); }
+        .badge.pending{ background:var(--amber-soft); color:var(--amber); }
 
-                .brand span {
-                    color: var(--accent);
-                }
+        .empty{ color:var(--text-soft); font-size:13px; padding:14px 0; }
 
-            .logout-btn {
-                color: #F3C9BE;
-                text-decoration: none;
-                font-size: 12.5px;
-                font-weight: 600;
-                border: 1px solid rgba(243,201,190,0.35);
-                padding: 7px 14px;
-                border-radius: 7px;
-            }
-
-                .logout-btn:hover {
-                    background: rgba(210,72,58,0.2);
-                    color: #fff;
-                }
-
-            .hero {
-                background: linear-gradient(120deg, var(--navy), var(--navy-2));
-                color: #fff;
-                padding: 0 32px 34px;
-                position: relative;
-            }
-
-            .hero-inner {
-                display: flex;
-                align-items: center;
-                gap: 16px;
-                position: relative;
-                z-index: 2;
-            }
-
-            .avatar-big {
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                background: radial-gradient(circle at 65% 35%, var(--accent), #B84E20);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 20px;
-                flex-shrink: 0;
-            }
-
-            .hero h1 {
-                font-size: 21px;
-                font-weight: 700;
-            }
-
-            .hero p {
-                font-size: 13px;
-                color: #B7C0CC;
-                margin-top: 2px;
-            }
-
-            .content {
-                padding: 0 32px 40px;
-                max-width: 960px;
-                margin: -20px auto 0;
-                position: relative;
-                z-index: 3;
-            }
-
-            .stat-row {
-                display: grid;
-                grid-template-columns: repeat(auto-fit,minmax(170px,1fr));
-                gap: 14px;
-                margin-bottom: 22px;
-            }
-
-            .stat-card {
-                background: var(--card);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 16px;
-                box-shadow: 0 6px 18px rgba(22,32,44,0.06);
-            }
-
-                .stat-card .ic {
-                    font-size: 18px;
-                    margin-bottom: 8px;
-                }
-
-                .stat-card .val {
-                    font-size: 22px;
-                    font-weight: 700;
-                }
-
-                .stat-card .lbl {
-                    font-size: 11.5px;
-                    color: var(--text-soft);
-                    text-transform: uppercase;
-                    letter-spacing: .3px;
-                    margin-top: 2px;
-                }
-
-            .card {
-                background: var(--card);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 22px;
-                margin-bottom: 20px;
-                box-shadow: 0 6px 18px rgba(22,32,44,0.05);
-            }
-
-            .card-head {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 16px;
-            }
-
-                .card-head h3 {
-                    font-size: 15px;
-                    font-weight: 700;
-                }
-
-            .btn-mini {
-                background: var(--accent);
-                color: #fff;
-                text-decoration: none;
-                font-size: 11.5px;
-                font-weight: 600;
-                padding: 7px 13px;
-                border-radius: 7px;
-            }
-
-                .btn-mini:hover {
-                    background: #D25E22;
-                }
-
-            .profile-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-                font-size: 13.5px;
-            }
-
-                .profile-grid div span {
-                    color: var(--text-soft);
-                    display: block;
-                    font-size: 11px;
-                    text-transform: uppercase;
-                    letter-spacing: .3px;
-                    margin-bottom: 3px;
-                }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 13px;
-            }
-
-            th {
-                text-align: left;
-                color: var(--text-soft);
-                font-weight: 600;
-                font-size: 11px;
-                text-transform: uppercase;
-                letter-spacing: .3px;
-                padding: 9px 10px;
-                border-bottom: 1px solid var(--border);
-            }
-
-            td {
-                padding: 11px 10px;
-                border-bottom: 1px solid var(--border);
-            }
-
-            tr:last-child td {
-                border-bottom: none;
-            }
-
-            .badge {
-                padding: 4px 11px;
-                border-radius: 20px;
-                font-size: 11px;
-                font-weight: 600;
-            }
-
-                .badge.present, .badge.approved {
-                    background: var(--green-soft);
-                    color: var(--green);
-                }
-
-                .badge.absent, .badge.rejected {
-                    background: var(--red-soft);
-                    color: var(--red);
-                }
-
-                .badge.late, .badge.pending {
-                    background: var(--amber-soft);
-                    color: var(--amber);
-                }
-
-            .empty {
-                color: var(--text-soft);
-                font-size: 13px;
-                padding: 14px 0;
-            }
-
-            @@media (max-width: 600px) {
-                .content {
-                    padding: 0 16px 40px;
-                }
-
-                .profile-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
+        @@media (max-width: 600px){
+            .content{ padding:0 16px 40px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="topbar">
         <div class="topbar-inner">
-            <div class="brand">Prim<span>Xact</span> HR</div>
+            <div class="brand">Prim<span>Xact</span> Workspace</div>
             <a href="/Account/Logout" class="logout-btn">Logout</a>
         </div>
         <div class="hero">
             <div class="hero-inner">
-                <div class="avatar-big">@(emp.emp_name.Length > 0 ? emp.emp_name.Substring(0, 1).ToUpper() : "E")</div>
+                <div class="avatar-big">@(emp.emp_name.Length > 0 ? emp.emp_name.Substring(0,1).ToUpper() : "E")</div>
                 <div>
                     <h1>Welcome, @emp.emp_name</h1>
-                    <p>@emp.designation · My Employee Portal</p>
+                    <p>@emp.designation</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="content">
-
-        <div class="stat-row">
-            <div class="stat-card">
-                <div class="ic">📅</div>
-                <div class="val">@ViewBag.Attendance.Count</div>
-                <div class="lbl">Recent Attendance</div>
-            </div>
-            <div class="stat-card">
-                <div class="ic">📝</div>
-                <div class="val">@ViewBag.Leaves.Count</div>
-                <div class="lbl">Leave Requests</div>
-            </div>
-            <div class="stat-card">
-                <div class="ic">💰</div>
-                <div class="val">@ViewBag.Payroll.Count</div>
-                <div class="lbl">Payslips</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-head"><h3>My Profile</h3></div>
-            <div class="profile-grid">
-                <div><span>Email</span>@emp.emp_email</div>
-                <div><span>Phone</span>@emp.phone</div>
-                <div><span>Designation</span>@emp.designation</div>
-                <div><span>Joining Date</span>@emp.joiningDate.ToString("dd-MM-yyyy")</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-head"><h3>Recent Attendance</h3></div>
-            @if (ViewBag.Attendance.Count == 0)
-            {
-                <div class="empty">No attendance records yet.</div>
-            }
-            else
-            {
-                <table>
-                    <tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Status</th></tr>
-                    @foreach (var a in ViewBag.Attendance)
-                    {
-                        <tr>
-                            <td>@a.date.ToString("dd-MM-yyyy")</td>
-                            <td>@a.checkIn</td>
-                            <td>@a.checkOut</td>
-                            <td><span class="badge @a.status.ToString().ToLower()">@a.status</span></td>
-                        </tr>
-                    }
-                </table>
-            }
-        </div>
 
         <div class="card">
             <div class="card-head">
@@ -393,14 +137,12 @@
             else
             {
                 <table>
-                    <tr><th>Month</th><th>Basic Salary</th><th>Deduction</th><th>Net Salary</th></tr>
+                    <tr><th>Month</th><th>Net Salary</th></tr>
                     @foreach (var p in ViewBag.Payroll)
                     {
                         <tr>
                             <td>@p.month</td>
-                            <td>@p.basic_salary</td>
-                            <td>@p.deduction</td>
-                            <td><strong>@p.net_salary</strong></td>
+                            <td><strong>Rs @p.net_salary</strong></td>
                         </tr>
                     }
                 </table>

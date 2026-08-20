@@ -60,6 +60,87 @@
                 background: var(--border);
                 color: var(--text);
             }
+
+    .status-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: none;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--text-soft);
+        padding: 6px 11px;
+        border-radius: 7px;
+        transition: .15s;
+    }
+
+        .status-trigger:hover {
+            background: #F5F6F8;
+            color: var(--text);
+            border-color: #D5D9DE;
+        }
+
+    .status-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 32px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: 0 12px 28px rgba(22,32,44,0.14);
+        z-index: 10;
+        min-width: 220px;
+        overflow: hidden;
+        padding: 6px;
+    }
+
+    .status-option {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 9px 10px;
+        text-decoration: none;
+        border-radius: 7px;
+        transition: .12s;
+    }
+
+        .status-option .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-option.amber .dot {
+            background: #D9A125;
+        }
+
+        .status-option.red .dot {
+            background: #D2483A;
+        }
+
+        .status-option.green .dot {
+            background: #2E9E6B;
+        }
+
+        .status-option .opt-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .status-option .opt-sub {
+            font-size: 11px;
+            color: var(--text-soft);
+            margin-top: 1px;
+        }
+
+        .status-option:hover {
+            background: #F5F6F8;
+        }
 </style>
 
 <div class="panel" style="padding:0; overflow:visible;">
@@ -138,18 +219,37 @@
                         <a href="/Employee/Edit/@emp.emp_id" class="icon-btn" style="color:#5B8DEF; font-weight:600;">Edit</a>
 
                         <div style="position:relative; display:inline-block;">
-                            <button type="button" onclick="toggleMenu(@emp.emp_id)" class="icon-btn" style="color:var(--text-soft); font-weight:600; background:none; border:none; cursor:pointer; font-size:13px;">
-                                Change Status ▾
+                            <button type="button" onclick="toggleMenu(@emp.emp_id)" class="status-trigger">
+                                Change Status
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </button>
-                            <div id="menu-@emp.emp_id" style="display:none; position:absolute; right:0; top:26px; background:#fff; border:1px solid var(--border); border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.12); z-index:10; min-width:170px; overflow:hidden;">
+                            <div id="menu-@emp.emp_id" class="status-menu">
                                 @if (emp.status != "Deactivated" && emp.status != "Terminated")
                                 {
-                                    <a href="/Employee/Deactivate/@emp.emp_id" onclick="return confirm('Deactivate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#B8860B; text-decoration:none;">🟡 Deactivate Employee</a>
-                                    <a href="/Employee/Terminate/@emp.emp_id" onclick="return confirm('Terminate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#B0483F; text-decoration:none; border-top:1px solid var(--border);">🔴 Terminate Employee</a>
+                                    <a href="/Employee/Deactivate/@emp.emp_id" onclick="return confirm('Deactivate this employee?');" class="status-option amber">
+                                        <span class="dot"></span>
+                                        <div>
+                                            <div class="opt-title">Deactivate</div>
+                                            <div class="opt-sub">Temporarily suspend access</div>
+                                        </div>
+                                    </a>
+                                    <a href="/Employee/Terminate/@emp.emp_id" onclick="return confirm('Terminate this employee?');" class="status-option red">
+                                        <span class="dot"></span>
+                                        <div>
+                                            <div class="opt-title">Terminate</div>
+                                            <div class="opt-sub">End employment permanently</div>
+                                        </div>
+                                    </a>
                                 }
                                 @if (emp.status == "Deactivated" || emp.status == "Terminated")
                                 {
-                                    <a href="/Employee/Reactivate/@emp.emp_id" onclick="return confirm('Reactivate this employee?');" style="display:block; padding:10px 14px; font-size:12.5px; color:#2E9E6B; text-decoration:none;">🟢 Reactivate Employee</a>
+                                    <a href="/Employee/Reactivate/@emp.emp_id" onclick="return confirm('Reactivate this employee?');" class="status-option green">
+                                        <span class="dot"></span>
+                                        <div>
+                                            <div class="opt-title">Reactivate</div>
+                                            <div class="opt-sub">Restore full access</div>
+                                        </div>
+                                    </a>
                                 }
                             </div>
                         </div>

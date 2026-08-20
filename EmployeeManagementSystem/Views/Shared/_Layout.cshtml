@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@inject EmployeeManagementSystem.Models.AppDbContext _dbContext
+@{
+    var pendingLeaveCount = _dbContext.Leaves.Count(l => l.status == "Pending");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -333,7 +337,13 @@
             <a href="/Employee/Index"><span class="dot"></span> Employees</a>
             <a href="/Department/Index"><span class="dot"></span> Departments</a>
             <a href="/Attendance/Index"><span class="dot"></span> Attendance</a>
-            <a href="/Leave/Index"><span class="dot"></span> Leave Management</a>
+            <a href="/Leave/Index" style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; align-items:center; gap:10px;"><span class="dot"></span> Leave Management</span>
+                @if (pendingLeaveCount > 0)
+                {
+                    <span style="background:#D2483A; color:#fff; font-size:10.5px; font-weight:700; padding:2px 7px; border-radius:10px; min-width:18px; text-align:center;">@pendingLeaveCount</span>
+                }
+            </a>
             <a href="/Payroll/Index"><span class="dot"></span> Payroll</a>
             <a href="/Report/Index"><span class="dot"></span> Reports</a>
         </div>
@@ -362,7 +372,7 @@
                 <div style="width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;">
                     @(Context.Session.GetString("UserRole") == "Admin" ? "A" : "HR")
                 </div>
-                <span>@(Context.Session.GetString("UserRole") ?? "Admin") </span>
+                <span>@(Context.Session.GetString("UserRole") ?? "Admin")</span>
             </div>
         </div>
         <div class="content">

@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Employee Status History";
+}
+
+<a href="/Report/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Reports</a>
+
+<div class="panel" style="padding:0; overflow:hidden;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+        <div style="width:34px; height:34px; border-radius:9px; background:#ECEAFB; display:flex; align-items:center; justify-content:center; font-size:16px;">📜</div>
+        <div>
+            <strong>Employee Status History</strong>
+            <div style="color:var(--text-soft); font-size:11.5px;">Audit log of all status changes</div>
+        </div>
+    </div>
+
+    @if (ViewBag.History.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No status changes recorded yet.</div>
+    }
+    else
+    {
+        <table>
+            <tr><th>Employee</th><th>Old Status</th><th>New Status</th><th>Changed By</th><th>Date & Time</th></tr>
+            @foreach (var h in ViewBag.History)
+            {
+                var empName = "Unknown";
+                foreach (var e in ViewBag.Employees)
+                {
+                    if (e.emp_id == h.emp_id) { empName = e.emp_name; }
+                }
+                <tr>
+                    <td>@empName</td>
+                    <td>@h.old_status</td>
+                    <td>
+                        @{
+                            var badgeColor = h.new_status == "Active" ? "#E4F5EC" : h.new_status == "Deactivated" ? "#FDF3E0" : "#FDECEA";
+                            var textColor = h.new_status == "Active" ? "#2E9E6B" : h.new_status == "Deactivated" ? "#B8860B" : "#B0483F";
+                        }
+                        <span style="background:@badgeColor; color:@textColor; padding:3px 11px; border-radius:20px; font-size:11.5px; font-weight:600;">@h.new_status</span>
+                    </td>
+                    <td>@h.changed_by</td>
+                    <td>@h.changed_date.ToString("dd-MM-yyyy hh:mm tt")</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

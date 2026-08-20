@@ -14,5 +14,7 @@ namespace EmployeeManagementSystem.Models
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<Designation> Designations { get; set; }
+        public DbSet<EmployeeStatusHistory> EmployeeStatusHistories { get; set; }
     }
 }
