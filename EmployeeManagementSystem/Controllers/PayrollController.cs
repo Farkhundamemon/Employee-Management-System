@@ -27,7 +27,8 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult Create(Payroll payroll)
         {
-            payroll.net_salary = payroll.basic_salary - payroll.deduction;
+            payroll.gross_salary = payroll.basic_salary + payroll.allowances;
+            payroll.net_salary = payroll.gross_salary - payroll.deduction;
             _context.Payrolls.Add(payroll);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -42,7 +43,8 @@ namespace EmployeeManagementSystem.Controllers
         [HttpPost]
         public IActionResult Edit(Payroll payroll)
         {
-            payroll.net_salary = payroll.basic_salary - payroll.deduction;
+            payroll.gross_salary = payroll.basic_salary + payroll.allowances;
+            payroll.net_salary = payroll.gross_salary - payroll.deduction;
             _context.Payrolls.Update(payroll);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -54,6 +56,17 @@ namespace EmployeeManagementSystem.Controllers
             if (payroll != null)
             {
                 _context.Payrolls.Remove(payroll);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult MarkPaid(int id)
+        {
+            var payroll = _context.Payrolls.Find(id);
+            if (payroll != null)
+            {
+                payroll.payment_status = "Paid";
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");

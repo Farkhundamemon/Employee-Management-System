@@ -15,8 +15,14 @@ namespace EmployeeManagementSystem.Models
 
         public decimal basic_salary { get; set; }
 
+        public decimal allowances { get; set; } = 0;
+
         public decimal deduction { get; set; }
 
+        public decimal gross_salary { get; set; }
+
         public decimal net_salary { get; set; }
+
+        public string payment_status { get; set; } = "Pending";
     }
 }
