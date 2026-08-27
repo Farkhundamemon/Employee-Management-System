@@ -37,6 +37,11 @@ namespace EmployeeManagementSystem.Controllers
         public IActionResult Create(Employee emp)
         {
             emp.status = "Active";
+
+            var lastEmployee = _context.Employees.OrderByDescending(e => e.emp_id).FirstOrDefault();
+            int nextNumber = lastEmployee != null ? lastEmployee.emp_id + 1 : 1;
+            emp.employee_code = "EMP-" + nextNumber.ToString("D3");
+
             _context.Employees.Add(emp);
             _context.SaveChanges();
             return RedirectToAction("Index");
@@ -51,7 +56,6 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
         public IActionResult Edit(Employee emp)
         {
             var existing = _context.Employees.Find(emp.emp_id);
@@ -60,8 +64,14 @@ namespace EmployeeManagementSystem.Controllers
                 existing.emp_name = emp.emp_name;
                 existing.emp_email = emp.emp_email;
                 existing.phone = emp.phone;
+                existing.gender = emp.gender;
+                existing.date_of_birth = emp.date_of_birth;
+                existing.cnic = emp.cnic;
+                existing.address = emp.address;
+                existing.emergency_contact = emp.emergency_contact;
                 existing.Dep_id = emp.Dep_id;
                 existing.designation = emp.designation;
+                existing.employment_type = emp.employment_type;
                 existing.joiningDate = emp.joiningDate;
                 existing.salary = emp.salary;
                 existing.password = emp.password;
@@ -69,6 +79,22 @@ namespace EmployeeManagementSystem.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var emp = _context.Employees.Find(id);
+            if (emp == null) return RedirectToAction("Index");
+
+            var department = _context.Departments.FirstOrDefault(d => d.Dep_id == emp.Dep_id);
+            var manager = emp.reporting_manager_id != null
+                ? _context.Employees.FirstOrDefault(e => e.emp_id == emp.reporting_manager_id)
+                : null;
+
+            ViewBag.DepartmentName = department != null ? department.Dep_name : "N/A";
+            ViewBag.ManagerName = manager != null ? manager.emp_name : "N/A";
+
+            return View(emp);
         }
 
         public IActionResult Deactivate(int id)

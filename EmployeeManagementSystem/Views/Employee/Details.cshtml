@@ -1,0 +1,49 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<a href="/Employee/Index" class="btn outline" style="margin-bottom:16px;">&larr; Back to Employees</a>
+
+<div class="panel" style="max-width:700px; margin:0 auto;">
+
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border);">
+        <div style="width:52px; height:52px; border-radius:50%; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700;">
+            @(Model.emp_name.Length > 0 ? Model.emp_name.Substring(0, 1).ToUpper() : "E")
+        </div>
+        <div>
+            <div style="font-size:18px; font-weight:700;">@Model.emp_name</div>
+            <div style="color:var(--text-soft); font-size:13px;">@Model.designation &middot; @ViewBag.DepartmentName</div>
+        </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Employee Code</div><div>@(Model.employee_code ?? "—")</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Status</div><div>@Model.status</div></div>
+
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Email</div><div>@Model.emp_email</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Phone</div><div>@Model.phone</div></div>
+
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Gender</div><div>@(Model.gender ?? "—")</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Date of Birth</div><div>@(Model.date_of_birth?.ToString("dd-MM-yyyy") ?? "—")</div></div>
+
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">CNIC</div><div>@(Model.cnic ?? "—")</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Employment Type</div><div>@Model.employment_type</div></div>
+
+        <div style="grid-column:span 2;"><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Address</div><div>@(Model.address ?? "—")</div></div>
+
+        <div style="grid-column:span 2;"><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Emergency Contact</div><div>@(Model.emergency_contact ?? "—")</div></div>
+
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Department</div><div>@ViewBag.DepartmentName</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Reporting Manager</div><div>@ViewBag.ManagerName</div></div>
+
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Joining Date</div><div>@Model.joiningDate.ToString("dd-MM-yyyy")</div></div>
+        <div><div style="font-size:11px; color:var(--text-soft); text-transform:uppercase;">Salary</div><div>Rs @Model.salary</div></div>
+    </div>
+
+    <div style="margin-top:24px;">
+        <a href="/Employee/Edit/@Model.emp_id" class="btn">Edit Employee</a>
+    </div>
+
+</div>

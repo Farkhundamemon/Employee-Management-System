@@ -8,5 +8,7 @@ namespace EmployeeManagementSystem.Models
         public int Dep_id { get; set; }
 
         public string Dep_name { get; set; }
+
+        public int? department_head_id { get; set; }
     }
 }
