@@ -1,0 +1,47 @@
+﻿@model List<EmployeeManagementSystem.Models.Designation>
+
+@{
+    ViewData["Title"] = "Designations";
+}
+
+<div class="panel" style="padding:0; overflow:hidden;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:9px; background:var(--accent-soft); display:flex; align-items:center; justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <div>
+                <strong>Designations</strong>
+                <div style="color:var(--text-soft); font-size:11.5px;">@Model.Count total</div>
+            </div>
+        </div>
+        <a href="/Designation/Create" class="btn">+ Add Designation</a>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No designations added yet.</div>
+    }
+    else
+    {
+        <table>
+            <tr><th>Title</th><th>Department</th><th>Action</th></tr>
+            @foreach (var d in Model)
+            {
+                var deptName = "Unknown";
+                foreach (var dept in ViewBag.Departments)
+                {
+                    if (dept.Dep_id == d.department_id) { deptName = dept.Dep_name; }
+                }
+                <tr>
+                    <td><strong>@d.title</strong></td>
+                    <td>@deptName</td>
+                    <td>
+                        <a href="/Designation/Edit/@d.designation_id" class="icon-btn" style="color:#5B8DEF; font-weight:600;">Edit</a>
+                        <a href="/Designation/Delete/@d.designation_id" class="icon-btn" style="color:#D2483A; font-weight:600;" onclick="return confirm('Are you sure?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

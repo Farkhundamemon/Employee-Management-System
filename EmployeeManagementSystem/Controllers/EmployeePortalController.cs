@@ -25,11 +25,13 @@ namespace EmployeeManagementSystem.Controllers
             var attendance = _context.Attendances.Where(a => a.emp_id == empId).OrderByDescending(a => a.date).Take(5).ToList();
             var leaves = _context.Leaves.Where(l => l.emp_id == empId).ToList();
             var payroll = _context.Payrolls.Where(p => p.emp_id == empId).OrderByDescending(p => p.payroll_id).ToList();
+            var department = _context.Departments.FirstOrDefault(d => d.Dep_id == employee.Dep_id);
 
             ViewBag.Employee = employee;
             ViewBag.Attendance = attendance;
             ViewBag.Leaves = leaves;
             ViewBag.Payroll = payroll;
+            ViewBag.DepartmentName = department != null ? department.Dep_name : "N/A";
 
             return View();
         }

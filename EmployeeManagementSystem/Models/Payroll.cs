@@ -17,6 +17,12 @@ namespace EmployeeManagementSystem.Models
 
         public decimal allowances { get; set; } = 0;
 
+        public decimal tax { get; set; } = 0;
+
+        public decimal pf_employee_share { get; set; } = 0;
+
+        public decimal loan_deduction { get; set; } = 0;
+
         public decimal deduction { get; set; }
 
         public decimal gross_salary { get; set; }

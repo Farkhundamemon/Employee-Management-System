@@ -1,0 +1,53 @@
+﻿@model List<EmployeeManagementSystem.Models.Loan>
+
+@{
+    ViewData["Title"] = "Employee Loans";
+}
+
+<div class="panel" style="padding:0; overflow:hidden;">
+    <div style="padding:18px 22px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:9px; background:#FDECEA; display:flex; align-items:center; justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2483A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div>
+                <strong>Employee Loans</strong>
+                <div style="color:var(--text-soft); font-size:11.5px;">@Model.Count total</div>
+            </div>
+        </div>
+        <a href="/Loan/Create" class="btn">+ Add Loan</a>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div style="padding:30px; color:var(--text-soft); text-align:center;">No loans added yet.</div>
+    }
+    else
+    {
+        <table>
+            <tr><th>Employee ID</th><th>Loan Amount</th><th>Monthly Installment</th><th>Remaining Balance</th><th>Status</th><th>Action</th></tr>
+            @foreach (var loan in Model)
+            {
+                <tr>
+                    <td>@loan.emp_id</td>
+                    <td>Rs @loan.loan_amount</td>
+                    <td>Rs @loan.monthly_installment</td>
+                    <td>Rs @loan.remaining_balance</td>
+                    <td>
+                        @if (loan.status == "Active")
+                        {
+                            <span style="background:#FDF3E0; color:#B8860B; padding:3px 11px; border-radius:20px; font-size:11.5px; font-weight:600;">Active</span>
+                        }
+                        else
+                        {
+                            <span style="background:#E4F5EC; color:#2E9E6B; padding:3px 11px; border-radius:20px; font-size:11.5px; font-weight:600;">Completed</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Loan/Delete/@loan.loan_id" class="icon-btn" style="color:#D2483A; font-weight:600;" onclick="return confirm('Are you sure?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
